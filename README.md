@@ -14,7 +14,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | ID | Nombre | Issue |
 | :--- | :--- | :--- |
 | US - 01 | [Organización y estudio entretenido](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/13) | 1 |
-| US - 02 | [lol]() | 2 |
+| US - 02 | [Gestion de la atencion y enfoque](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/14) | 2 |
 | US - 03 | [lol]() | 3 |
 
 # Historias de usuarios
