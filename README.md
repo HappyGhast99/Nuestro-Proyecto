@@ -13,13 +13,13 @@ Nuestra propuesta consiste en una aplicación que automatiza la planificación d
 | :--- | :--- | :--- |
 | US - 01 | [Sistemas de aletas visuales por cemaforo de urgencia](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/2) | 1 |
 | US - 02 | [Fragmentacion de proyectos en subtareas](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/3) | 2 |
-| US - 03 | [Modo de enfoque con restriccion de interrupciones](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/4) | 3 |
+| US - 03 | [Modo de enfoque con restricción de interrupciones](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/4) | 3 |
 | US - 04 | [Sistema de recompenza y racha diaria](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/5) | 4 |
-| US - 05 | [Retroalimentacion de estimacion en tiempo real](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/6) | 5 |
+| US - 05 | [Retroalimentación de estimación en tiempo real](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/6) | 5 |
 | US - 06 | [Estado animico vinculado al progreso](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/7) | 6 |
 | US - 07 | [Sincronizacion de hitos academicos](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/8) | 7 |
-| US - 08 | [Generacion automatica del plan semanal](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/9) | 8 |
-| US - 09 | [Personalizacion de la mascota](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/10) | 9 |
+| US - 08 | [Generación automatica del plan semanal](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/9) | 8 |
+| US - 09 | [Personalización de la mascota](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/10) | 9 |
 | US - 10 | [Sistema de alertas emocionales (notificaciones)](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/11) | 10 |
 
 # Diseño arquitectonico: 
