@@ -15,7 +15,9 @@ Una gran problemática en el ámbito universitario es la gestión ineficiente de
 # Diseño arquitectonico: 
 
 # Atributos:
-  
+
+[Atributos del proyectos]( https://github.com/HappyGhast99/Nuestro-Proyecto/issues/7)
+
 # Integrantes de la organización:
 
 | Integrantes | Rol | Items de la rubrica a cargo |
