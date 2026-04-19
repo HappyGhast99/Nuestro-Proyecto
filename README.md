@@ -21,7 +21,7 @@ Nuestra propuesta consiste en una aplicación que automatiza la planificación d
 
 # Atributos:
 
-[Atributos del proyectos]( https://github.com/HappyGhast99/Nuestro-Proyecto/issues/7)
+[Atributos del proyectos](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/12)
 
 # Figma
 
