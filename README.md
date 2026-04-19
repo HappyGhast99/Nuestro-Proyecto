@@ -50,7 +50,7 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 # Atributos:
 
-[Atributos del proyecto](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/12)
+[Ver atributos](./ATRIBUTOS.md)
 
 # Figma
 
