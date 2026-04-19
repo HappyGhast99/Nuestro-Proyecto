@@ -52,8 +52,8 @@ https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&m=
 
 | Integrantes | Rol | Ítems de la rúbrica a cargo |
 | :--- | :--- | :--- |
-| Antonia Bustamante Borquez | Ver ubicación de salas | 1) |
-| Joaquin Bustamante Ramirez | Ver capacidad de salas | 2) |
-| Fernanda Cerda Toledo | Reservar sala rápidamente | 3) |
-| Martin Duran Salinas | Cancelar reserva | 4) |
-| Matthew Osorio Muñoz | Prioridad por facultad | 5) |
+| Antonia Bustamante Borquez |  |  |
+| Joaquin Bustamante Ramirez |  |  |
+| Fernanda Cerda Toledo |  |  |
+| Martin Duran Salinas |  |  |
+| Matthew Osorio Muñoz |  |  |
