@@ -48,6 +48,10 @@ Como equipo, llegamos a la decisión de optar por el diseño arquitectónico de 
 
 Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, consideramos que es la más indicada para nuestros objetivos. Al ser todo independiente, podemos organizarnos mejor con cada cambio, así como correlacionar entre sí aquellos microservicios. De esta forma, podemos trabajar de manera independiente en cada uno y, al mismo tiempo, lograr que se integren entre ellos.
 
+### __Diagrama resumen__: 
+
+![Imagen diseño arquitectonico](./imagenes/diseno_arquitectonico.png)
+
 # Atributos:
 
 [Ver atributos](./ATRIBUTOS.md)
