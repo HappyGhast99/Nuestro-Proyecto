@@ -6,7 +6,7 @@ Una gran problemática en el ámbito universitario es la gestión ineficiente de
 
 | ID | Nombre | Issue |
 | :--- | :--- | :--- |
-| US - 01 | La falta de urgencia | 1) |
+| US - 01 | [La falta de urgencia](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/2) | 1) |
 | US - 02 | Sentirse abrumado (Micro tareas) | 2) |
 | US - 03 | Distracciones y falta de concentración | 3) |
 | US - 04 | La falta de recompensa inmediata | 4) |
