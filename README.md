@@ -19,7 +19,7 @@ Nuestra propuesta consiste en una aplicación que automatiza la planificación d
 
 # Diseño arquitectonico: 
 
-Como equipo llegamos a la decision de optar por el diseño arquitectónico de micro-servicios, basandonos en las prioridades de nuestro proyecto y en nuestra visión sobre la funcion de la pagina/aplicación, ya que necesitamos de muchos procesos que tienen que funcionar a la vez, pero de manera independiente como:
+Como equipo llegamos a la decision de optar por el diseño arquitectónico de __Micro-Servicios__, basandonos en las prioridades de nuestro proyecto y en nuestra visión sobre la funcion de la pagina/aplicación, ya que necesitamos de muchos procesos que tienen que funcionar a la vez, pero de manera independiente como:
 
 * __Microservicio para Usuarios__: (BD) Debido que necesitamos los datos del usuario, como nombre, email, contraseña, etc.
 * __Microservicio de Tareas/Calendario__: Necesitamos conectar con el calendario academico del estudiante, o con la agenda del usuario, lo cual se guardaria en la BD para enviar tareas y ajustar la aplicacion y mascota en base a sus ocupaciones.
