@@ -23,6 +23,10 @@ Nuestra propuesta consiste en una aplicación que automatiza la planificación d
 
 [Atributos del proyectos]( https://github.com/HappyGhast99/Nuestro-Proyecto/issues/7)
 
+# Figma
+
+https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&m=dev&t=WDdg5RyzMNzE9ppz-1
+
 # Integrantes de la organización:
 
 | Integrantes | Rol | Items de la rubrica a cargo |
