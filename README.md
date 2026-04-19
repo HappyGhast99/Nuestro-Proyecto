@@ -15,7 +15,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | :--- | :--- | :--- |
 | US - 01 | [Organización y estudio entretenido](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/13) | 1 |
 | US - 02 | [Gestion de la atencion y enfoque](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/14) | 2 |
-| US - 03 | [](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/15) | 3 |
+| US - 03 | [Motor de Inteligencia Predictiva y Autoconocimiento Temporal](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/15) | 3 |
 
 # Historias de usuarios
 
