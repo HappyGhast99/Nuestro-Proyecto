@@ -19,6 +19,20 @@ Nuestra propuesta consiste en una aplicación que automatiza la planificación d
 
 # Diseño arquitectonico: 
 
+Como equipo llegamos a la decision de optar por el diseño arquitectónico de micro-servicios, basandonos en las prioridades de nuestro proyecto y en nuestra visión sobre la funcion de la pagina/aplicación, ya que necesitamos de muchos procesos que tienen que funcionar a la vez, pero de manera independiente como:
+
+* __Microservicio para Usuarios__: (BD) Debido que necesitamos los datos del usuario, como nombre, email, contraseña, etc.
+* __Microservicio de Tareas/Calendario__: Necesitamos conectar con el calendario academico del estudiante, o con la agenda del usuario, lo cual se guardaria en la BD para enviar tareas y ajustar la aplicacion y mascota en base a sus ocupaciones.
+
+* __Microservicio para Pagos/Suscripciones__: Esta seccion debe ser sobretodo la mas independiente al resto, para brindar seguridad a traves de una BD aislada de las demas, proteger especificamente esta informacion del usuario.
+
+* __Microservicio para Notificaciones/Rachas__: Servicio en segundo plano para enviar avisos directos al usuario, al igual que actualizar las rachas diarias.
+
+*  __Microservicio para Mascota Virtual__: Implementacion de IA, para mantener al usuario atento a rachas y notificaciones, al igual que implementar un sistema de recompensa, mini-juegos y demas, sin afectar los pagos y conjugandose con los demas servicios.
+
+
+Esta estructura escogida es compleja de aplicar, pero apesar de eso, consideramos que es la mas indicada para nuestros ofrecimientos, al ser todo independiente podemos ordenarnos mejor con cada cambio, al igual que podemos correlacionar entre si aquellos microservicios, por lo que podemos hacer un trabajo independiente en cada uno, y a la vez que puedan combinarse entre ellos mismos.  
+
 # Atributos:
 
 [Atributos del proyectos](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/12)
