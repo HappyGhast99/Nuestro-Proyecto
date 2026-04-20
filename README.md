@@ -114,6 +114,9 @@ __Racha:__
 * conteo_dias
 * ultima_fecha_actividad
 
+<img width="2790" height="6762" alt="Usuario Management Framework-2026-04-20-165139" src="https://github.com/user-attachments/assets/2e7fed27-619b-44a8-9cce-32c5fe0dc87b" />
+
+
 # Figma
 
 https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&m=dev&t=WDdg5RyzMNzE9ppz-1
