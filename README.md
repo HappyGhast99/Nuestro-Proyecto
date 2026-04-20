@@ -114,6 +114,80 @@ __Racha:__
 * conteo_dias
 * ultima_fecha_actividad
 
+  classDiagram
+    direction LR
+    class Usuario {
+        +id
+        +nombre
+        +correo
+        +password
+        +nivel_experiencia
+        +monedas_totales
+        +racha_actual
+    }
+
+    class Mascota {
+        +id
+        +usuario_id
+        +nombre
+        +especie
+        +estado_salud
+        +nivel_animico
+        +nivel_afecto
+        +experiencia_mascota
+    }
+
+    class Ciclo_de_estudio {
+        +id
+        +usuario_id
+        +titulo
+        +descripcion
+        +duracion_bloque
+        +estado
+        +fecha_entrega
+        +es_prioritaria
+        +recompensa_monedas
+    }
+
+    class Transaccion_de_Monedas {
+        +id
+        +usuario_id
+        +cantidad
+        +fuente
+        +fecha_creacion
+    }
+
+    class Tienda_de_objetos {
+        +id
+        +nombre
+        +categoria
+        +precio
+        +efecto
+    }
+
+    class Inventario {
+        +id
+        +usuario_id
+        +item_id
+        +cantidad_disponible
+        +esta_equipada
+    }
+
+    class Racha {
+        +id
+        +usuario_id
+        +conteo_dias
+        +ultima_fecha_actividad
+    }
+
+    %% Relaciones
+    Usuario "1" --> "1" Mascota : tiene
+    Usuario "1" --> "n" Ciclo_de_estudio : gestiona
+    Usuario "1" --> "n" Transaccion_de_Monedas : registra
+    Usuario "1" --> "1" Racha : mantiene
+    Usuario "1" --> "n" Inventario : posee
+    Tienda_de_objetos "1" --> "n" Inventario : contiene
+
 # Figma
 
 https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&m=dev&t=WDdg5RyzMNzE9ppz-1
