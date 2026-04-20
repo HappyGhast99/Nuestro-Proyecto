@@ -58,14 +58,14 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 # Entidades del dominio 
 
-Usuario:
+__Usuario:__
 * id
 * nombre 
 * correo 
 * nivel_experiencia
 * monedas_totales
 
-Mascota:
+__Mascota:__
 * id 
 * nombre 
 * especie 
@@ -73,7 +73,7 @@ Mascota:
 * nivel_animico
 * nivel_afecto
 
-Ciclo de estudio:
+__Ciclo de estudio:__
 * id 
 * titulo 
 * duracion_bloque
@@ -81,20 +81,20 @@ Ciclo de estudio:
 * fecha_entrega
 * recompensa_puntos
 
-Tienda de objetos:
+__Tienda de objetos:__
 * id 
 * nombre
 * categoria 
 * precio
 * efecto
 
-Inventario:
+__Inventario:__
 * id
 * usuario_id
 * item_id
 * esta_equipada
 
-Racha:
+__Racha:__
 * id
 * usuario_id
 * conteo_dias
