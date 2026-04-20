@@ -108,8 +108,8 @@ https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&m=
 
 | Integrantes | Rol | Ítems de la rúbrica a cargo |
 | :--- | :--- | :--- |
-| Antonia Bustamante Borquez |  |  |
-| Joaquin Bustamante Ramirez |  |  |
-| Fernanda Cerda Toledo |  |  |
-| Martin Duran Salinas |  |  |
-| Matthew Osorio Muñoz |  |  |
+| Antonia Bustamante Borquez | Product Owner |  |
+| Joaquin Bustamante Ramirez | Developers |  |
+| Fernanda Cerda Toledo | Developers |  |
+| Martin Duran Salinas | Scrum master |  |
+| Matthew Osorio Muñoz | Developers |  |
