@@ -61,9 +61,11 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 __Usuario:__
 * id
 * nombre 
-* correo 
+* correo
+* contraseña
 * nivel_experiencia
 * monedas_totales
+* racha_actual
 
 __Mascota:__
 * id 
@@ -72,14 +74,25 @@ __Mascota:__
 * estado_salud
 * nivel_animico
 * nivel_afecto
+* xp_mascota
 
 __Ciclo de estudio:__
-* id 
-* titulo 
+* id
+* usuario_id
+* titulo
+* descripcion
 * duracion_bloque
 * estado
 * fecha_entrega
+* es_prioritaria
 * recompensa_puntos
+
+__Transaccion de monedas:__
+* id
+* usuario_id
+* cantida
+* fuente
+* fecha
 
 __Tienda de objetos:__
 * id 
@@ -92,6 +105,7 @@ __Inventario:__
 * id
 * usuario_id
 * item_id
+* cantidad_disponible
 * esta_equipada
 
 __Racha:__
