@@ -59,11 +59,11 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 # Entidades del dominio 
 
 Usuario:
-* __id:
-* __nombre 
-* __correo 
-* __nivel_experiencia
-* __monedas_totales
+* _id:
+* _nombre 
+* _correo 
+* _nivel_experiencia
+* _monedas_totales
 
 Mascota:
 * __id 
