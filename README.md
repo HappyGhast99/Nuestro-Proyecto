@@ -56,7 +56,7 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 [Ver atributos](./ATRIBUTOS.md)
 
-#Entidades del dominio 
+# Entidades del dominio 
 
 
 # Figma
