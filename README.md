@@ -56,6 +56,9 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 [Ver atributos](./ATRIBUTOS.md)
 
+#Entidades del dominio 
+
+
 # Figma
 
 https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&m=dev&t=WDdg5RyzMNzE9ppz-1
