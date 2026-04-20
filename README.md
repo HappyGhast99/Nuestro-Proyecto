@@ -59,7 +59,7 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 # Entidades del dominio 
 
 Usuario:
-* id:
+* id
 * nombre 
 * correo 
 * nivel_experiencia
