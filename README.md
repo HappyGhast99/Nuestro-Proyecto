@@ -59,46 +59,46 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 # Entidades del dominio 
 
 Usuario:
-*id:
-*nombre 
-*correo 
-*nivel_experiencia
-*monedas_totales
+* __id:
+* __nombre 
+* __correo 
+* __nivel_experiencia
+* __monedas_totales
 
 Mascota:
-*id 
-*nombre 
-*especie 
-*estado_salud
-*nivel_animico
-*nivel_afecto
+* __id 
+* __nombre 
+* __especie 
+* __estado_salud
+* __nivel_animico
+* __nivel_afecto
 
 Ciclo de estudio:
-*id 
-*titulo 
-*duracion_bloque
-*estado
-*fecha_entrega
-*recompensa_puntos
+* __id 
+* __titulo 
+* __duracion_bloque
+* __estado
+* __fecha_entrega
+* __recompensa_puntos
 
 Tienda de objetos:
-*id 
-*nombre
-*categoria 
-*precio
-*efecto
+* __id 
+* __nombre
+* __categoria 
+* __precio
+* __efecto
 
 Inventario:
-*id
-*usuario_id
-*item_id
-*esta_equipada
+* __id
+* __usuario_id
+* __item_id
+* __esta_equipada
 
 Racha:
-*id
-*usuario_id
-*conteo_dias
-*ultima_fecha_actividad
+* __id
+* __usuario_id
+* __conteo_dias
+* __ultima_fecha_actividad
 
 # Figma
 
