@@ -11,3 +11,4 @@
 
 # Diseño arquitectónico: 
 
+ [ Ver Diseño arquitectonico](ARQUI.md)
