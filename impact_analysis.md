@@ -31,13 +31,13 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
  [ Ver Diseño arquitectonico](ARQUI.md)
 
-# Requisitos Extrafuncionales:
+# Requisitos Extrafuncionales (no cambian):
 
 [Ver Requisitos Extrafuncionales](ReqExtrafuncionales.md)
 
-# Entidades del dominio:
+# Entidades del dominio (no cambian):
 
-[Ver Entidades del dominio](Entidades.md)
+[Ver Entidades del dominio](Entidadesdedominio.md)
 
 # Figma
 
