@@ -38,7 +38,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 # Requisitos Extrafuncionales:
 
-[Ver requisitos](ReqExtrafuncionales.md)
+[Ver Requisitos Extrafuncionales](ReqExtrafuncionales.md)
 
 # Entidades del dominio 
 
