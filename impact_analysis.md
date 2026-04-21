@@ -17,7 +17,7 @@
 
 [Ver Requisitos Extrafuncionales](ReqExtrafuncionales.md)
 
-# Entidades del dominio 
+# Entidades del dominio:
 
 [Ver Entidades del dominio](Entidades.md)
 
