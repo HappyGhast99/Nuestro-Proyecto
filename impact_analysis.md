@@ -42,3 +42,13 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 # Figma
 
 [Focuspets](https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&p=f&t=JbesrMftXTk4cdNU-0)
+
+# Integrantes de la organización:
+
+| Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
+| :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
+| Antonia Bustamante Borquez | Product Owner | Historias de usuarios (épicas y normales), diagrama de arquitectura, problemática y solución. |
+| Joaquin Bustamante Ramirez | Developers    | Historias de usuarios (épicas y normales), entidades del dominio y diagrama del dominio.      |
+| Fernanda Cerda Toledo      | Developers    | Historias de usuarios (épicas y normales), mockups, repositorio, requisitos extrafuncionales. |
+| Martin Duran Salinas       | Scrum Master  | Mockups, repositorio.                                                                         |
+| Matthew Osorio Muñoz       | Developers    | Mockups, diseño arquitectónico, analisis trade-off.                                           |
