@@ -27,7 +27,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | US - 03 | [Gamificacón](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/18)                                                  |   3   |
 
 
-# Diseño arquitectónico: 
+# Diseño arquitectónico (nuevo): 
 
  [ Ver Diseño arquitectonico](ARQUI.md)
 
