@@ -10,3 +10,6 @@
 | Interoperabilidad | ¿Debe integrase con otros sistemas, APIs o servicios externos?  | :white_check_mark: | Medio | La idea es que se conecte con otras aplicaciones perp por el momento sera manual. |
 | Recuperabilidad | ¿Qué pasa si falla? ¿Debe recuperarse automáticamente? ¿Hay transacciones criticas? | :white_check_mark: | Alto | La idea es que todos los progresos de esta aplicacion se guarden de manera automatica para que cuando se caida algun servidor y esto afecte a la aplicacion en general, para cuando esta vuelva esten los ultimos procesos del usuario y asi no se pierda nada. |
 | Testabilidad | ¿Qué tan fácil debe ser verificar que funciona correctamente? ¿Hay CI/CD? | :white_check_mark: | Medio | El sistema tendrá una arquitectura modular que permita realizar pruebas unitarias fácilmente, asegurando la estabilidad de funciones críticas como el cálculo de tiempos y las rutinas personalizadas antes de lanzar nuevas versiones. |
+
+# Volver al inicio
+[Regresar](README.md)
