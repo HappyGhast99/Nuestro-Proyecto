@@ -56,5 +56,7 @@ __Racha:__
 * conteo_dias
 * ultima_fecha_actividad
 
-<img width="2790" height="6762" alt="Usuario Management Framework-2026-04-20-165139" src="https://github.com/user-attachments/assets/2e7fed27-619b-44a8-9cce-32c5fe0dc87b" />
+<img width="500" height="750" alt="Usuario Management Framework-2026-04-20-165139" src="https://github.com/user-attachments/assets/2e7fed27-619b-44a8-9cce-32c5fe0dc87b" />
 
+# Volver al inicio
+[Regresar](README.md)
