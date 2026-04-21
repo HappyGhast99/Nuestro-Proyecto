@@ -1,6 +1,6 @@
 # Entidades de dominio:
 
-_Esto esta basado en la pagina "2" de nuestro figma_
+_Esto esta basado en la página "2" de nuestro diseño en figma._
 
 Usuario:
 
