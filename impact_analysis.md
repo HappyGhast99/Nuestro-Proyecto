@@ -12,3 +12,15 @@
 # Diseño arquitectónico: 
 
  [ Ver Diseño arquitectonico](ARQUI.md)
+
+# Requisitos Extrafuncionales:
+
+[Ver Requisitos Extrafuncionales](ReqExtrafuncionales.md)
+
+# Entidades del dominio 
+
+[Ver Entidades del dominio](Entidades.md)
+
+# Figma
+
+[Focuspets](https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&p=f&t=JbesrMftXTk4cdNU-0)
