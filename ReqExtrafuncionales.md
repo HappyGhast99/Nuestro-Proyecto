@@ -13,3 +13,6 @@
 
 # Volver al inicio
 [Regresar](README.md)
+
+# Volver al inicio de la sumativa 1
+[Regresar](impac_analysis.md)
