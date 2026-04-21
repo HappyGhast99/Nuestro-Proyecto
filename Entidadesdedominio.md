@@ -1,4 +1,6 @@
-#Entidades de dominio:
+# Entidades de dominio:
+
+_Esto esta basado en la pagina "2" de nuestro figma_
 
 Usuario:
 
