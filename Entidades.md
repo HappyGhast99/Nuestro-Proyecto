@@ -1,60 +1,67 @@
-# Entidades de dominio:
+Entidades de dominio:
 
-__Usuario:__ 
+Usuario:
+
 * id
-* nombre 
+* nombre
 * correo
 * contraseña
 * nivel_experiencia
 * monedas_totales
 * racha_actual
 
-__Mascota:__
-* id 
-* nombre 
-* especie 
+Mascota:
+
+* id
+* nombre
+* especie
 * estado_salud
-* nivel_animico
+* nivel_anímico
 * nivel_afecto
 * xp_mascota
 
-__Ciclo de estudio:__
+Ciclo de estudio:
+
 * id
 * usuario_id
-* titulo
-* descripcion
-* duracion_bloque
+* título
+* descripción
+* duración_bloque
 * estado
 * fecha_entrega
 * es_prioritaria
 * recompensa_puntos
 
-__Transaccion de monedas:__
+Transacción de monedas:
+
 * id
 * usuario_id
-* cantida
+* cantidad
 * fuente
 * fecha
 
-__Tienda de objetos:__
-* id 
+Tienda de objetos:
+
+* id
 * nombre
-* categoria 
+* categoría
 * precio
 * efecto
 
-__Inventario:__
+Inventario:
+
 * id
 * usuario_id
 * item_id
 * cantidad_disponible
-* esta_equipada
+* está_equipada
 
-__Racha:__
+Racha:
+
 * id
 * usuario_id
-* conteo_dias
-* ultima_fecha_actividad
+* conteo_días
+* última_fecha_actividad
 
 <img width="500" height="750" alt="Usuario Management Framework-2026-04-20-165139" src="https://github.com/user-attachments/assets/2e7fed27-619b-44a8-9cce-32c5fe0dc87b" />
 
