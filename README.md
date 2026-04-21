@@ -125,8 +125,8 @@ __Racha:__
 
 | Integrantes | Rol | Ítems de la rúbrica a cargo |
 | :--- | :--- | :--- |
-| Antonia Bustamante Borquez | Product Owner | Diagrama de diseño arquitectonico, Problematica y Solución |
+| Antonia Bustamante Borquez | Product Owner | Historias de usuarios (epicas y normales), Diagrama de diseño arquitectonico,  Problematica y Solución |
 | Joaquin Bustamante Ramirez | Developers | Historias de usuarios (epicas y normales), Entidades del dominio y Diagrama  |
-| Fernanda Cerda Toledo | Developers | Figma, Repositorio, Atributos |
+| Fernanda Cerda Toledo | Developers | Historias de usuarios (epicas y normales), Figma, Repositorio, Requisitos Extrafuncionales |
 | Martin Duran Salinas | Scrum master | Figma |
 | Matthew Osorio Muñoz | Developers | Figma, diseño arquitectonico |
