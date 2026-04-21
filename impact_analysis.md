@@ -4,7 +4,7 @@
 
 Se nos pidio optimizar el tiempo de respuesta de los microservicios con una respuesta menor a un segundo y tambien generar dependencias entre los modulos. 
 
-Para la resolución del problema se nos ocurrieron dos formas de actuar, una añadiendo un nuevo modulo (modulo extra) para crear una dependencia entre ellos y la segunda es unificar los módulos y redireccionarlos a una misma base de datos, terminamos eligiendo la segunda opción ya que requiere menor gasto al no tener que agregar ningún modulo extra  y solo tener que optimizar lo que ya tenemos para así lograr el tiempo de espera deseado.
+Para la resolución del problema se nos ocurrieron dos formas de actuar, la primera añadiendo un nuevo modulo (modulo extra) para crear una dependencia entre ellos y la segunda es unificar los módulos y redireccionarlos a una misma base de datos, terminamos eligiendo la segunda opción ya que requiere menor gasto al no tener que agregar ningún modulo extra  y solo tener que optimizar lo que ya tenemos para así lograr el tiempo de espera deseado.
 
 Nuestra solución es unificar los módulos, se nos pidió resumidamente la optimización de tiempo de respuesta en gamificación, calendario, tareas, originalmente comenzamos utilizando una arquitectura de micro servicios cada uno con una base de datos independiente, junto a nuestra propuesta de cambio unificaremos 3 módulos ("Calendario", "Mascota Virtual", "Notificaciones"), en una sola base de datos para así poder optimizar y agilizar tanto solicitudes de usuario, tiempo de espera y ejecución del sistema. A su vez se unificaran las dependencias ya que  por ejemplo al completar una tarea del calendarios acreditaran puntos al usuario en la misma transacción, no  hay peligro de que un servicio funcione y el otro falle.
 
