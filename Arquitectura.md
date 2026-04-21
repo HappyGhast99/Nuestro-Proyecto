@@ -16,4 +16,7 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 ### __Diagrama resumen__: 
 
-![Imagen diseño arquitectonico](./imagenes/diseno_arquitectonico.png)
+<img width="900" height="733" alt="Diagrama_diseño" src="https://github.com/user-attachments/assets/4df470ec-9365-4630-baab-65bbc70f9750" />
+
+# Volver al inicio
+[Regresar](README.md)
