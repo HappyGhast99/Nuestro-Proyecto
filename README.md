@@ -52,9 +52,9 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 ![Imagen diseño arquitectonico](./imagenes/diseno_arquitectonico.png)
 
-# Atributos:
+# Requisitos Extrafuncionales:
 
-[Ver atributos](./ATRIBUTOS.md)
+[Ver requisitos](ReqExtrafuncionales.md)
 
 # Entidades del dominio 
 
