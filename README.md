@@ -119,7 +119,7 @@ __Racha:__
 
 # Figma
 
-https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&m=dev&t=WDdg5RyzMNzE9ppz-1
+[ Ver figma ](Focuspets.md)
 
 # Integrantes de la organización:
 
