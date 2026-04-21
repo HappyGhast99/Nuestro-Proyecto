@@ -58,7 +58,7 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 # Entidades del dominio 
 
-__Usuario:__
+__Usuario:__ 
 * id
 * nombre 
 * correo
