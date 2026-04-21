@@ -125,8 +125,8 @@ __Racha:__
 
 | Integrantes | Rol | Ítems de la rúbrica a cargo |
 | :--- | :--- | :--- |
-| Antonia Bustamante Borquez | Product Owner |  |
-| Joaquin Bustamante Ramirez | Developers |  |
-| Fernanda Cerda Toledo | Developers |  |
-| Martin Duran Salinas | Scrum master |  |
-| Matthew Osorio Muñoz | Developers |  |
+| Antonia Bustamante Borquez | Product Owner | Diagrama de diseño arquitectonico, Problematica y Solución |
+| Joaquin Bustamante Ramirez | Developers | Historias de usuarios (epicas y normales), Entidades del dominio y Diagrama  |
+| Fernanda Cerda Toledo | Developers | Figma, Repositorio, Atributos |
+| Martin Duran Salinas | Scrum master | Figma |
+| Matthew Osorio Muñoz | Developers | Figma, diseño arquitectonico |
