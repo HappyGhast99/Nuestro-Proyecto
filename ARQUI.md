@@ -17,3 +17,6 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 # Volver al inicio
 [Regresar](impact_analysis.md)
+
+# Volver al inicio de la sumativa 1
+[Regresar](impact_analysis.md)
