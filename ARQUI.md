@@ -12,3 +12,6 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 
 # Diagrama de arquitectónico:
 
+
+# Volver al inicio
+[Regresar](impact_analysis.md)
