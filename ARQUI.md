@@ -1,6 +1,6 @@
 # Diseño arquitectónico NUEVO 
 
-## Como equipo, llegamos a la decisión de optar por el diseño arquitectónico de __Microservicios__, basándonos en las prioridades de nuestro proyecto y en nuestra visión sobre la función de la página/aplicación, ya que necesitamos muchos procesos que deben funcionar a la vez, pero de manera independiente, como:
+### Como equipo, llegamos a la decisión de optar por el diseño arquitectónico de __Microservicios__, basándonos en las prioridades de nuestro proyecto y en nuestra visión sobre la función de la página/aplicación, ya que necesitamos muchos procesos que deben funcionar a la vez, pero de manera independiente, como:
 
 * __Microservicio para Usuarios (BD)__: Debido a que necesitamos los datos del usuario, como nombre, email, contraseña, etc.
 
