@@ -56,4 +56,4 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | Joaquin Bustamante Ramirez | Developers    | Historias de usuarios (épicas y normales), entidades del dominio y diagrama del dominio.      |
 | Fernanda Cerda Toledo      | Developers    | Historias de usuarios (épicas y normales), mockups, repositorio, requisitos extrafuncionales. |
 | Martin Duran Salinas       | Scrum Master  | Mockups, repositorio.                                                                         |
-| Matthew Osorio Muñoz       | Developers    | Mockups, diseño arquitectónico.                                                               |
+| Matthew Osorio Muñoz       | Developers    | Mockups, diseño arquitectónico, analisis trade-off.                                           |
