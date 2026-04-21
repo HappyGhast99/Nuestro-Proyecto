@@ -69,3 +69,6 @@ Racha:
 
 # Volver al inicio
 [Regresar](README.md)
+
+# Volver al inicio de la sumativa 1
+[Regresar](impact_analysis.md)
