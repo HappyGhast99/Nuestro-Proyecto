@@ -22,10 +22,10 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 | ID      | Nombre                                                                                                                     | Issue |
 | :------ | :------------------------------------------------------------------------------------------------------------------------  | :---- |
-| US - 01 | [Seciones]()                           |   1   |
-| US - 02 | [Tareas](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/17)                             |   2   |
-| US - 03 | [Gamificacón](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/18) |   3   |
-| US - 04 | [Calendario]() |   4   | 
+| US - 01 | [Calendario](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/16)                                                   |   1   |
+| US - 02 | [Tareas y Sesiones](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/17)                                                       |   2   |
+| US - 03 | [Gamificacón](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/18)                                                  |   3   |
+
 
 # Diseño arquitectónico: 
 
