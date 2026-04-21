@@ -13,5 +13,7 @@ Esta estructura escogida es compleja de aplicar, pero, a pesar de eso, considera
 # Diagrama de arquitectónico:
 
 
+<img width="900" height="733" alt="Diagrama_diseño" src="./imagenes/diagrama_sumativa1.png" />
+
 # Volver al inicio
 [Regresar](impact_analysis.md)
