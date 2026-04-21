@@ -15,4 +15,4 @@
 [Regresar](README.md)
 
 # Volver al inicio de la sumativa 1
-[Regresar](impac_analysis.md)
+[Regresar](impact_analysis.md)
