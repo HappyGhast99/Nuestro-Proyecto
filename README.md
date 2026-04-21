@@ -42,7 +42,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 # Entidades del dominio 
 
-[Ver Entidades del dominio](Entidadesdedominio)
+[Ver Entidades del dominio](Entidadesdedominio.md)
 
 # Figma
 
