@@ -34,7 +34,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 # Diseño arquitectónico: 
 
-[Ver Diseño arquitectónico](ReqExtrafuncionales.md)
+[Ver Diseño arquitectónico](Arquitectura.md)
 
 # Requisitos Extrafuncionales:
 
