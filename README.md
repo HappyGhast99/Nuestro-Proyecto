@@ -54,7 +54,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 # Imagenes de testeo sobre API subtareas:
 
-[Imagenes (10)](./imagenes)
+[Imagenes](./imagenes) (10)
 
 # Integrantes de la organización:
 
