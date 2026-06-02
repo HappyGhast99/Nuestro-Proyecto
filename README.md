@@ -52,6 +52,9 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 [LINK](https://chatgpt.com/share/6a1e80bb-6f58-83e9-a592-1f2c1e07fd7d)
 
+# Imagenes de testeo sobre API subtareas:
+
+[Imagenes (10)](./imagenes)
 
 # Integrantes de la organización:
 
