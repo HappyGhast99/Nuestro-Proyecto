@@ -64,5 +64,4 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | Matthew Osorio Muñoz       | Developers    | Integrador y Gestor del Repositorio.                                                          |
 
 
-<img width="930" height="1041" alt="image" src="https://github.com/user-attachments/assets/00cfbc3b-4385-4351-8112-c7585a338e51" />
 
