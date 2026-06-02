@@ -117,3 +117,118 @@ app.delete('/cursos/:id', (req, res) => {
 });
 
 app.listen(3000, () => console.log('API en http://localhost:3000'));
+// =================================================================
+// ENDPOINTS DE SUBTAREAS (HISTORIA DE USUARIO: CHECKLIST Y PROGRESO)
+// =================================================================
+
+/**
+ * @swagger
+ * /subtareas:
+ *   post:
+ *     summary: Escenario 1 - Registrar una nueva subtarea (Checklist)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [tarea_id, descripcion]
+ *             properties:
+ *               tarea_id: { type: integer }
+ *               descripcion: { type: string }
+ *     responses:
+ *       201:
+ *         description: Subtarea creada con estado 'pendiente' por defecto (DoD)
+ */
+app.post('/subtareas', (req, res) => {
+  const { tarea_id, descripcion } = req.body;
+  
+  if (!tarea_id || !descripcion || descripcion.trim() === "") {
+    return res.status(400).json({ error: 'El id de la tarea principal y la descripción son obligatorios.' });
+  }
+
+  const estadoInicial = 'pendiente';
+  
+  const r = db.prepare(
+    'INSERT INTO subtareas (tarea_id, descripcion, estado) VALUES (?, ?, ?)'
+  ).run(tarea_id, descripcion, estadoInicial);
+  
+  res.status(201).json({ 
+    id: r.lastInsertRowid, 
+    tarea_id, 
+    descripcion, 
+    estado: estadoInicial 
+  });
+});
+
+/**
+ * @swagger
+ * /subtareas/{id}/estado:
+ *   put:
+ *     summary: Escenario 2 - Cambiar estado a 'completada' y retornar progreso parcial
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [estado]
+ *             properties:
+ *               estado: { type: string, enum: [pendiente, completada] }
+ *     responses:
+ *       200:
+ *         description: Estado actualizado y porcentaje calculado
+ */
+app.put('/subtareas/:id/estado', (req, res) => {
+  const { estado } = req.body;
+  const subtareaId = req.params.id;
+
+  if (estado !== 'pendiente' && estado !== 'completada') {
+    return res.status(400).json({ error: 'El estado solo puede ser pendiente o completada.' });
+  }
+
+  const subtarea = db.prepare('SELECT tarea_id FROM subtareas WHERE id = ?').get(subtareaId);
+  if (!subtarea) {
+    return res.status(404).json({ error: 'Subtarea no encontrada.' });
+  }
+
+  db.prepare('UPDATE subtareas SET estado = ? WHERE id = ?').run(estado, subtareaId);
+
+  const todas = db.prepare('SELECT estado FROM subtareas WHERE tarea_id = ?').all(subtarea.tarea_id);
+  const completadas = todas.filter(s => s.estado === 'completada').length;
+  
+  const porcentajeProgreso = todas.length > 0 ? Math.round((completadas / todas.length) * 100) : 0;
+
+  res.json({ 
+    mensaje: 'Estado de subtarea actualizado.',
+    subtarea_id: Number(subtareaId),
+    nuevo_estado: estado,
+    tarea_principal_id: subtarea.tarea_id,
+    barra_progreso: `${porcentajeProgreso}%`
+  });
+});
+
+/**
+ * @swagger
+ * /subtareas/tarea/{tarea_id}:
+ *   get:
+ *     summary: Obtener subtareas de una tarea y su barra de progreso global
+ */
+app.get('/subtareas/tarea/:tarea_id', (req, res) => {
+  const { tarea_id } = req.params;
+  const lista = db.prepare('SELECT * FROM subtareas WHERE tarea_id = ?').all(tarea_id);
+  
+  const completadas = lista.filter(s => s.estado === 'completada').length;
+  const porcentaje = lista.length > 0 ? Math.round((completadas / lista.length) * 100) : 0;
+
+  res.json({
+    tarea_id: Number(tarea_id),
+    barra_progreso: `${porcentaje}%`,
+    subtareas: lista
+  });
+});
