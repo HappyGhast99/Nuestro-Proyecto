@@ -53,13 +53,9 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 | Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
 | :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
-| Antonia Bustamante Borquez | Product Owner | Historias de usuarios (épicas y normales), diagrama de arquitectura, problemática y solución. |
-| Joaquin Bustamante Ramirez | Developers    | Historias de usuarios (épicas y normales), entidades del dominio y diagrama del dominio.      |
-| Fernanda Cerda Toledo      | Developers    | Historias de usuarios (épicas y normales), mockups, repositorio, requisitos extrafuncionales. |
-| Martin Duran Salinas       | Scrum Master  | Mockups, repositorio.                                                                         |
-| Matthew Osorio Muñoz       | Developers    | Mockups, diseño arquitectónico, analisis trade-off.                                           |
-
-# Sumativa 1
-
-[Ver la entrega](impact_analysis.md)
+| Antonia Bustamante Borquez | Product Owner | Desarrollador Backend - API 2.                                                                |
+| Joaquin Bustamante Ramirez | Developers    | Ingeniero de Pruebas (QA).                                                                    |
+| Fernanda Cerda Toledo      | Developers    | Desarrolladora Backend - API 1.                                                               |
+| Martin Duran Salinas       | Scrum Master  | Analista de Requerimientos.                                                                   |
+| Matthew Osorio Muñoz       | Developers    | Integrador y Gestor del Repositorio.                                                          |
 
