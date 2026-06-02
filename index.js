@@ -116,4 +116,47 @@ app.delete('/cursos/:id', (req, res) => {
   res.json({ mensaje: 'Curso eliminado' });
 });
 
+/**
+ * @swagger
+ * /actividades:
+ *   post:
+ *     summary: Crea una nueva actividad en el calendario (CA 1)
+ */
+app.post('/actividades', (req, res) => {
+  const { titulo, fecha, hora, etiquetas } = req.body;
+  const r = db.prepare(
+    'INSERT INTO actividades (titulo, fecha, hora, etiquetas) VALUES (?, ?, ?, ?)'
+  ).run(titulo, fecha, hora, etiquetas);
+  res.status(201).json({ id: r.lastInsertRowid, titulo, fecha, hora, etiquetas, posposiciones: 0 });
+});
+
+/**
+ * @swagger
+ * /actividades/{id}/posponer:
+ *   put:
+ *     summary: Pospone una tarea un máximo de 3 veces (CA 3)
+ */
+app.put('/actividades/:id/posponer', (req, res) => {
+  const actividad = db.prepare('SELECT posposiciones FROM actividades WHERE id=?').get(req.params.id);
+  
+  if (!actividad) return res.status(404).json({ error: 'Actividad no encontrada' });
+  
+  if (actividad.posposiciones >= 3) {
+    return res.status(403).json({ error: 'Límite de posposiciones alcanzado. Debes interactuar con la tarea.' });
+  }
+
+  db.prepare('UPDATE actividades SET posposiciones = posposiciones + 1 WHERE id=?').run(req.params.id);
+  res.json({ mensaje: 'Actividad pospuesta exitosamente', posposiciones_actuales: actividad.posposiciones + 1 });
+});
+
+/**
+ * @swagger
+ * /actividades:
+ *   get:
+ *     summary: Obtiene todas las actividades para evaluar notificaciones (CA 2)
+ */
+app.get('/actividades', (req, res) => {
+  res.json(db.prepare('SELECT * FROM actividades').all());
+});
+
 app.listen(3000, () => console.log('API en http://localhost:3000'));
