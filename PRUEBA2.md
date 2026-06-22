@@ -64,11 +64,6 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 - Spec-driven development: sí — especificaciones en ./openspecs/ 
 
-# Bonus (opcional):
-
-- Contenedores: sí — docker-compose en ./docker-compose.yml
-- Spec-driven development: sí — especificaciones en ./openspecs/
-
 ## Tecnologias:
 
 [Ver tecnologias](Tecnologias.md)
