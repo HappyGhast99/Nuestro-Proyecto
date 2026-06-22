@@ -33,9 +33,9 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | Especificación de HU               | [Especificacion de HU](./docs/EspecificacionHU.md)       | 
 | Diagrama de estados                | [Diagrama de Estados](./diagramas/diagramadeestados.png)           | 
 | Diagrama de despliegue y comp.     | [Despliegue y componentes](./diagramas/diagramadespliegue.png)           | 
-| Diagrama de componentes            | [Diagrama de componentes](./diagramadecomponentes.png)         | 
-| Diagrama de secuencia              | [Diagrama de secuencia](./diagramadesecuencia.png)           | 
-| Casos de prueba                    | [Casos de prueba.md](./docs/CasosDePrueba)          | 
+| Diagrama de componentes            | [Diagrama de componentes](./diagramas/diagramadecomponentes.png)         | 
+| Diagrama de secuencia              | [Diagrama de secuencia](./diagramas/diagramadesecuencia.png)           | 
+| Casos de prueba                    | [Casos de prueba.md](./docs/CasosDePrueba.md)          | 
 | Deuda técnica / code smells        | [Deuda Tecnica](./docs/DeudaTecnica.md)           | 
 
   
