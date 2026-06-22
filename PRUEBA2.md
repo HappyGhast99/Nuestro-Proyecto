@@ -95,3 +95,14 @@ docker-compose up --build
 - Requests y resolución de conflictos de fusión).
 - OpenSpec: Framework de diseño y especificación técnica que nos permitió estructurar las propuestas (proposal.md, design.md), archivar los cambios históricos y gestionar las decisiones de diseño mediante skills personalizadas.
 - Thunder Client / Postman: Herramientas utilizadas para realizar las pruebas manuales de caja negra en los endpoints.
+
+# Integrantes de la organización:
+
+| Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
+| :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
+| Antonia Bustamante Borquez | Product Owner | Analista de Requerimientos.                                                                   |
+| Joaquin Bustamante Ramirez | Developers    | Ingeniero de Pruebas (QA).                                                                    |
+| Fernanda Cerda Toledo      | Developers    | Desarrolladora Backend - API 1.                                                               |
+| Martin Duran Salinas       | Scrum Master  | Desarrollador Backend - API 2.                                                                |
+| Matthew Osorio Muñoz       | Developers    | Integrador y Gestor del Repositorio.                                                          |
+
