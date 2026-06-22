@@ -53,9 +53,14 @@
 
 ## Bonus (opcional) 
 
-- Contenedores: sí — docker-compose en ./ConDocker.md 
+- Contenedores: sí — docker-compose en (./ConDocker.md) 
 
 - Spec-driven development: sí — especificaciones en ./openspecs/ 
+
+# Bonus (opcional):
+
+* *Contenedores:* [sí] — docker-compose en ./docker-compose.yml
+* *Spec-driven development:* [sí] — especificaciones en ./openspecs/
 
 ## Tecnologias:
 
