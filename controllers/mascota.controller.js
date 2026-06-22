@@ -82,6 +82,38 @@ class MascotaController {
       res.status(500).json({ error: 'Error interno del servidor' });
     }
   }
+
+  /**
+   * Elimina la mascota asociada al usuario.
+   */
+  eliminarMascota(req, res) {
+    try {
+      const usuarioId = parseInt(req.params.usuarioId, 10);
+      if (isNaN(usuarioId)) {
+        return res.status(400).json({ error: 'El ID de usuario debe ser un número entero válido' });
+      }
+
+      // Validar si el usuario existe
+      const usuario = mascotaService.obtenerUsuarioPorId(usuarioId);
+      if (!usuario) {
+        return res.status(404).json({ error: 'Usuario no encontrado' });
+      }
+
+      // Validar si el usuario tiene una mascota
+      const mascota = mascotaService.obtenerMascotaPorUsuario(usuarioId);
+      if (!mascota) {
+        return res.status(404).json({ error: 'El usuario no tiene una mascota asignada' });
+      }
+
+      // Eliminar la mascota
+      mascotaService.eliminarMascota(usuarioId);
+
+      res.status(200).json({ mensaje: 'Mascota eliminada exitosamente' });
+    } catch (error) {
+      console.error('Error al eliminar la mascota:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  }
 }
 
 module.exports = new MascotaController();

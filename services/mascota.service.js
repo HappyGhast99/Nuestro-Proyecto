@@ -40,6 +40,16 @@ class MascotaService {
       salud: 100
     };
   }
+
+  /**
+   * Elimina la mascota asociada a un usuario.
+   * @param {number} usuarioId 
+   * @returns {number} Número de filas eliminadas
+   */
+  eliminarMascota(usuarioId) {
+    const info = db.prepare('DELETE FROM mascotas WHERE usuario_id = ?').run(usuarioId);
+    return info.changes;
+  }
 }
 
 module.exports = new MascotaService();

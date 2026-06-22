@@ -61,4 +61,25 @@ router.get('/usuarios/:usuarioId/mascota', mascotaController.obtenerMascota);
  */
 router.post('/usuarios/:usuarioId/mascota', mascotaController.registrarMascota);
 
+/**
+ * @swagger
+ * /api/usuarios/{usuarioId}/mascota:
+ *   delete:
+ *     summary: Elimina la mascota asociada a un usuario
+ *     parameters:
+ *       - in: path
+ *         name: usuarioId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Mascota eliminada exitosamente
+ *       404:
+ *         description: Usuario no encontrado o usuario no tiene mascota
+ *       500:
+ *         description: Error de servidor
+ */
+router.delete('/usuarios/:usuarioId/mascota', mascotaController.eliminarMascota);
+
 module.exports = router;
