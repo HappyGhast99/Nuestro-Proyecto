@@ -21,6 +21,7 @@ Esta skill se encarga de configurar y verificar la documentación interactiva de
 
 3. **Agregar Configuración de Swagger**
    Si no está configurado, agregar la inicialización de `swagger-jsdoc` y la ruta para servir Swagger UI en `/docs`:
+
    ```javascript
    const swaggerUi = require('swagger-ui-express');
    const swaggerJsdoc = require('swagger-jsdoc');
