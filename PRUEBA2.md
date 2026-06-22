@@ -15,22 +15,20 @@
 | US - 02 | [Fragmentación de proyectos en subtareas](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/3)               |   2   |
 | US - 09 | [Personalización de la mascota](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/10)                        |   9   |
 
-(Debe integrar: búsqueda con filtro, CRUD de una entidad y transacción que une 2+ entidades) 
-
   
 
 ## Artefactos del proyecto 
 
 | Artefacto                          | Ubicación / enlace          | 
 |------------------------------------|-----------------------------| 
-| Modelo de dominio                  | [enlace o imagen]           | 
-| Diagrama de casos de uso           | [enlace o imagen]           | 
+| Modelo de dominio                  | [Modelo de dominio](./diagramas/modelodominio.png)          | 
+| Diagrama de casos de uso           | [Casos de uso](./diagramas/Sistemafocuspets.png)           | 
 | Especificación de HU               | [Especificacion de HU](./docs/EspecificacionHU.md)       | 
-| Diagrama de estados                | [enlace o imagen]           | 
-| Diagrama de despliegue y comp.     | [enlace o imagen]           | 
-| Diagrama de componentes            | [enlace o imagen]           | 
-| Diagrama de secuencia              | [enlace o imagen]           | 
-| Casos de prueba                    | [Casos de prueba.md](./docs/CasosDePrueba.md)          | 
+| Diagrama de estados                | [Diagrama de Estados](./diagramas/diagramadeestados.png)           | 
+| Diagrama de despliegue y comp.     | [Despliegue y componentes](./diagramas/diagramadespliegue.png)           | 
+| Diagrama de componentes            | [Diagrama de componentes](./diagramadecomponentes.png)         | 
+| Diagrama de secuencia              | [Diagrama de secuencia](./diagramadesecuencia.png)           | 
+| Casos de prueba                    | [Casos de prueba.md](./docs/CasosDePrueba)          | 
 | Deuda técnica / code smells        | [Deuda Tecnica](./docs/DeudaTecnica.md)           | 
 
   
@@ -39,11 +37,11 @@
 
 ### Requisitos previos 
 
-[Ver los requisitos previos](Requisitos.md)
+[Lenguaje/versión, base de datos, Docker, etc.] 
 
 ### Variables de entorno 
 
-[Ver las variables de entorno](Variables.md)
+[Lista de variables necesarias] 
 
 ### Instalación y ejecución (sin Docker) 
 
@@ -55,9 +53,9 @@
 
 ## Bonus (opcional) 
 
-- Contenedores: [sí/no] — docker-compose en ./docker-compose.yml 
+- Contenedores: sí — docker-compose en ./ConDocker.md 
 
-- Spec-driven development: [sí/no] — especificaciones en ./openspecs/ 
+- Spec-driven development: sí — especificaciones en ./openspecs/ 
 
 ## Tecnologias:
 
