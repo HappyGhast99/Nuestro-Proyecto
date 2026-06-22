@@ -20,7 +20,7 @@ Nota: esto sólo para la historia que se implementará, independiente de los iss
 
 # Especificación de Historia de Usuario
  
-## US-01: Incentivos y Sistema de Arranque para Gestión de Tareas Académicas
+## US-02: Incentivos y Sistema de Arranque para Gestión de Tareas Académicas
 Como **estudiante universitario**, quiero **disponer de un sistema de temporizadores cortos, recompensas autodefinidas y desglose automático de proyectos**, para **reducir la procrastinación, superar la fricción inicial al estudiar y mantener la motivación**.
  
 ## Criterios de aceptación
