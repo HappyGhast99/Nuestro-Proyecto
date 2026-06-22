@@ -1,0 +1,11 @@
+description = "Generate test cases for POST and PUT endpoints in docs/test-cases.md"
+
+prompt = """
+Analyze the main entity of the API and generate a docs/test-cases.md file with test cases for the POST and PUT endpoints.
+
+**Requirements**
+
+- Apply Equivalence Partitioning (classes of equivalence): at least 1 valid class and 2 invalid classes per field.
+- Apply Boundary Value Analysis: test boundary values (minimum, maximum, just below/above boundaries).
+- Structure the table with: ID, Technique, Description, Input JSON, Expected HTTP/Body, and an empty 'Resultado real' column.
+"""
