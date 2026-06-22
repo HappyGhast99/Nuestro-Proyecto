@@ -29,7 +29,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | Artefacto                          | Ubicación / enlace          | 
 |------------------------------------|-----------------------------| 
 | Modelo de dominio                  | [Modelo de dominio](./PRUEBA2/diagramas/modelodominio.png)          | 
-| Diagrama de casos de uso           | [Casos de uso](./PRUEBA2/diagramas/Sistemafocuspets.png)            | 
+| Diagrama de casos de uso           | [Casos de uso](./diagramas/Sistemafocuspets.png)            | 
 | Especificación de HU               | [Especificacion de HU](./PRUEBA2/docs/EspecificacionHU.md)       | 
 | Diagrama de estados                | [Diagrama de Estados](./PRUEBA2/diagramas/diagramadeestados.png)           | 
 | Diagrama de despliegue y comp.     | [Despliegue y componentes](./PRUEBA2/diagramas/diagramadespliegue.png)           | 
