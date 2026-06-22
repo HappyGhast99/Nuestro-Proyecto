@@ -47,11 +47,11 @@
 
 ### Instalación y ejecución (sin Docker) 
 
-[Comandos paso a paso] 
+[Ver instalacion y ejecucion sin docker](SinDocker.md)
 
 ### Instalación y ejecución (con Docker)  <!-- si aplica (bonus) --> 
 
-[Ver instalacion y ejecucion con docker](Docker.md)
+[Ver instalacion y ejecucion con docker](ConDocker.md)
 
 ## Bonus (opcional) 
 
