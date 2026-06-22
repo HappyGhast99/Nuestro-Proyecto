@@ -7,16 +7,20 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
+// Cargar enrutador de mascotas
+const mascotaRouter = require('./routes/mascota');
+app.use('/api', mascotaRouter);
+
 const swaggerSpec = swaggerJsdoc({
   definition: {
     openapi: '3.0.0',
-    info: { title: 'API Cursos', version: '1.0.0' },
+    info: { title: 'API FocusPets y Cursos', version: '1.0.0' },
     servers: [
       { url: 'https://cursos-api.onrender.com', description: 'Produccion' },
       { url: 'http://localhost:3000',            description: 'Local' }
     ]
   },
-  apis: ['./index.js']
+  apis: ['./index.js', './routes/*.js']
 });
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -428,4 +432,4 @@ app.delete('/tareas/:id', (req, res) => {
   res.json({ mensaje: 'Tarea eliminada' });
 });
 
-app.listen(3000, () => console.log('API en http://localhost:3000'));
+app.listen(3000, () => console.log('API en http://localhost:3000'));

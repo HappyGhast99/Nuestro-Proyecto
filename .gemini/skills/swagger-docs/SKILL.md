@@ -1,30 +1,27 @@
 ---
 name: swagger-docs
-description: Generates OpenAPI 3.0 documentation for all Express API endpoints and serves it interactively on /docs.
+description: Generar documentación OpenAPI 3.0 para todos los endpoints de la API y servirla en GET /docs.
 license: MIT
-compatibility: Requires express, swagger-ui-express, and swagger-jsdoc npm packages.
+compatibility: Requiere Express, swagger-ui-express y swagger-jsdoc.
 metadata:
-  author: OpenSpec
+  author: openspec
   version: "1.0"
+  generatedBy: "1.4.1"
 ---
 
-# Reusable Swagger Documentation Generator
+Esta skill se encarga de configurar y verificar la documentación interactiva de la API utilizando Swagger (OpenAPI 3.0) en proyectos Express.
 
-This skill scans the project's main Express server file, installs swagger documentation libraries if missing, and configures Swagger UI to serve interactive documentation on `/docs` without altering existing business logic.
+## Pasos de Ejecución
 
-## Steps
+1. **Verificar Dependencias**
+   Comprobar si `swagger-ui-express` y `swagger-jsdoc` están instalados en `package.json`. Si no lo están, instalarlos con `npm install swagger-ui-express swagger-jsdoc`.
 
-1. **Verify or install dependencies**:
-   Check if `swagger-ui-express` and `swagger-jsdoc` are present in `package.json`. If not, run:
-   ```bash
-   npm install swagger-ui-express swagger-jsdoc
-   ```
+2. **Analizar Endpoints Existentes**
+   Escanear el archivo de entrada principal (ej. `index.js`) y los archivos de rutas (ej. `routes/*.js`) para identificar endpoints expuestos que carezcan de documentación `@swagger`.
 
-2. **Locate main Express file**:
-   Identify the entry point of the API (typically `index.js`, `server.js`, or `app.js`).
+3. **Agregar Configuración de Swagger**
+   Si no está configurado, agregar la inicialización de `swagger-jsdoc` y la ruta para servir Swagger UI en `/docs`:
 
-3. **Insert Swagger Setup**:
-   Insert the required swagger imports and middleware initialization into the main file:
    ```javascript
    const swaggerUi = require('swagger-ui-express');
    const swaggerJsdoc = require('swagger-jsdoc');
@@ -33,15 +30,16 @@ This skill scans the project's main Express server file, installs swagger docume
      definition: {
        openapi: '3.0.0',
        info: { title: 'API Documentation', version: '1.0.0' },
-       servers: [
-         { url: 'http://localhost:3000', description: 'Local Server' }
-       ]
+       servers: [{ url: 'http://localhost:3000' }]
      },
-     apis: ['./*.js'] // Scan current directory files for annotations
+     apis: ['./index.js', './routes/*.js']
    });
 
    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
    ```
 
-4. **Verify Annotations**:
-   Ensure all active routes have JSDoc comments containing `@swagger` tags describing their inputs, methods, and response codes.
+4. **Documentar Endpoints Faltantes**
+   Asegurar que cada ruta cuente con sus respectivos comentarios JSDoc bajo la etiqueta `@swagger` especificando el método, la descripción y las respuestas esperadas.
+
+5. **Verificar Funcionamiento**
+   Levantar el servidor localmente (ej. `npm start` o `node index.js`) y acceder a `http://localhost:3000/docs` para comprobar que la documentación interactiva se renderiza correctamente.

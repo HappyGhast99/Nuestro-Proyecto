@@ -1,28 +1,33 @@
 ---
 name: test-cases
-description: Analyzes the main API entity and generates a test-cases.md document under docs/ containing structured equivalence classes and boundary value tests.
+description: Analizar la entidad principal de la API y generar un archivo docs/test-cases.md con casos de prueba aplicando clases de equivalencia y análisis de valores límite.
 license: MIT
-compatibility: General-purpose documentation skill.
+compatibility: Genérico.
 metadata:
-  author: OpenSpec
+  author: openspec
   version: "1.0"
+  generatedBy: "1.4.1"
 ---
 
-# Reusable Test Cases Generator
+Esta skill analiza la estructura y las validaciones de los endpoints de creación (POST) y actualización (PUT) de la entidad principal de la API, y genera un archivo de documentación con los casos de prueba necesarios.
 
-This skill scans the main database entity defined in the API, and generates a comprehensive testing guide in `docs/test-cases.md` containing equivalence classes and boundary value tables for POST and PUT endpoints.
+## Pasos de Ejecución
 
-## Steps
+1. **Analizar la API y sus Entidades**
+   Revisar los archivos de controladores y rutas para identificar la entidad o entidades principales, sus campos, y las validaciones de negocio aplicadas.
 
-1. **Locate the main API entities**:
-   Find the schema definitions or database tables representing the main resource of the API (e.g., `tareas` or `cursos`).
+2. **Diseñar Casos de Prueba**
+   - **Clases de Equivalencia (CE):** Para cada campo relevante, definir al menos una clase de datos válida y dos clases inválidas (ej. campos vacíos, tipos de datos incorrectos, valores negativos/nulos).
+   - **Análisis de Valores Límite (VL):** Para campos numéricos o de longitud de cadena, definir casos de prueba para el límite inferior y superior válido, justo debajo del mínimo, y justo sobre el máximo.
 
-2. **Define Test Cases**:
-   - Apply **Equivalence Partitioning**:
-     - Define at least one valid case for the entity.
-     - Define at least two invalid cases per required field (e.g. empty string, wrong data type, missing field, negative numbers).
-   - Apply **Boundary Value Analysis**:
-     - Define cases around the minimum and maximum boundaries for integer fields (e.g., `duracion_bloque` or `creditos`).
+3. **Estructurar el Archivo de Salida**
+   Crear o actualizar `docs/test-cases.md`. El archivo debe estructurarse con tablas claras que incluyan:
+   - **ID**: Identificador del caso (ej. P01, L01).
+   - **Técnica**: Técnica utilizada (CE para Clases de Equivalencia, VL para Valores Límite).
+   - **Descripción**: Detalle breve de la prueba.
+   - **Input JSON**: Objeto JSON listo para ser copiado y pegado en Thunder Client o Postman.
+   - **HTTP esperado**: Código de estado HTTP esperado.
+   - **Resultado real**: Columna vacía para completarse manualmente durante la prueba.
 
-3. **Generate Output**:
-   Write the tables to `docs/test-cases.md` including columns for ID, Technique, Description, Input JSON, Expected HTTP response, and an empty column for "Resultado real".
+4. **Escribir el Archivo**
+   Guardar la documentación en `docs/test-cases.md` dentro de la raíz del proyecto.

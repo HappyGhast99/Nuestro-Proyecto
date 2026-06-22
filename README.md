@@ -48,6 +48,13 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 [Focuspets](https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&p=f&t=JbesrMftXTk4cdNU-0)
 
+# Link de Clarita Review:
+
+[LINK](https://chatgpt.com/share/6a1e80bb-6f58-83e9-a592-1f2c1e07fd7d)
+
+# Imagenes de testeo sobre API subtareas:
+
+[Imagenes](./imagenes) (10)
 
 # Integrantes de la organización:
 
@@ -58,4 +65,6 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | Fernanda Cerda Toledo      | Developers    | Desarrolladora Backend - API 1.                                                               |
 | Martin Duran Salinas       | Scrum Master  | Analista de Requerimientos.                                                                   |
 | Matthew Osorio Muñoz       | Developers    | Integrador y Gestor del Repositorio.                                                          |
+
+
 
