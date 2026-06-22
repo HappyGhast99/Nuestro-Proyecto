@@ -35,7 +35,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | Diagrama de despliegue y comp.     | [Despliegue y componentes](./diagramas/diagramadespliegue.png)           | 
 | Diagrama de componentes            | [Diagrama de componentes](./diagramas/diagramadecomponentes.png)         | 
 | Diagrama de secuencia              | [Diagrama de secuencia](./diagramas/diagramadesecuencia.png)           | 
-| Casos de prueba                    | [Casos de prueba.md](./docs/test-cases.md)          | 
+| Casos de prueba                    | [Casos de prueba](./docs/test-cases.md)          | 
 | Deuda técnica / code smells        | [Deuda Tecnica](./docs/DeudaTecnica.md)           | 
 
   
