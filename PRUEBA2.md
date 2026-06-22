@@ -39,11 +39,11 @@
 
 ### Requisitos previos 
 
-[Lenguaje/versión, base de datos, Docker, etc.] 
+[Ver los requisitos previos](Requisitos.md)
 
 ### Variables de entorno 
 
-[Lista de variables necesarias] 
+[Ver las variables de entorno](Variables.md)
 
 ### Instalación y ejecución (sin Docker) 
 
