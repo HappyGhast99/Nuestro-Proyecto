@@ -10,6 +10,8 @@
 
 ## Historia de usuario implementada 
 
+|  ID | Historia | Puntos |
+|----|----------|--------|
 | US - 02 | [Fragmentación de proyectos en subtareas](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/3)               |   2   |
 | US - 09 | [Personalización de la mascota](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/10)                        |   9   |
 
@@ -20,25 +22,15 @@
 ## Artefactos del proyecto 
 
 | Artefacto                          | Ubicación / enlace          | 
-
 |------------------------------------|-----------------------------| 
-
 | Modelo de dominio                  | [enlace o imagen]           | 
-
 | Diagrama de casos de uso           | [enlace o imagen]           | 
-
 | Especificación de HU               | [Especificacion de HU](./docs/EspecificacionHU.md)       | 
-
 | Diagrama de estados                | [enlace o imagen]           | 
-
 | Diagrama de despliegue y comp.     | [enlace o imagen]           | 
-
 | Diagrama de componentes            | [enlace o imagen]           | 
-
 | Diagrama de secuencia              | [enlace o imagen]           | 
-
 | Casos de prueba                    | [Casos de prueba.md](./docs/CasosDePrueba.md)          | 
-
 | Deuda técnica / code smells        | [Deuda Tecnica](./docs/DeudaTecnica.md)           | 
 
   
