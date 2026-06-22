@@ -1,4 +1,4 @@
-# FocusPets 
+# FocusPets 🐾
 
 
 ## Descripción del sistema 
