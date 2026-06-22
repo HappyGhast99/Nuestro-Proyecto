@@ -28,15 +28,15 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 | Artefacto                          | Ubicación / enlace          | 
 |------------------------------------|-----------------------------| 
-| Modelo de dominio                  | [Modelo de dominio](/Nuestro-Proyecto/diagramas/modelodominio.png)          | 
-| Diagrama de casos de uso           | [Casos de uso](./diagramas/Sistemafocuspets.png)           | 
-| Especificación de HU               | [Especificacion de HU](./docs/EspecificacionHU.md)       | 
-| Diagrama de estados                | [Diagrama de Estados](./diagramas/diagramadeestados.png)           | 
-| Diagrama de despliegue y comp.     | [Despliegue y componentes](./diagramas/diagramadespliegue.png)           | 
-| Diagrama de componentes            | [Diagrama de componentes](./diagramadecomponentes.png)         | 
-| Diagrama de secuencia              | [Diagrama de secuencia](./diagramadesecuencia.png)           | 
-| Casos de prueba                    | [Casos de prueba.md](./docs/CasosDePrueba)          | 
-| Deuda técnica / code smells        | [Deuda Tecnica](./docs/DeudaTecnica.md)           | 
+| Modelo de dominio                  | [Modelo de dominio](/Nuestro-Proyecto/PRUEBA2/diagramas/modelodominio.png)          | 
+| Diagrama de casos de uso           | [Casos de uso](./PRUEBA2/diagramas/Sistemafocuspets.png)           | 
+| Especificación de HU               | [Especificacion de HU](./PRUEBA2/docs/EspecificacionHU.md)       | 
+| Diagrama de estados                | [Diagrama de Estados](./PRUEBA2/diagramas/diagramadeestados.png)           | 
+| Diagrama de despliegue y comp.     | [Despliegue y componentes](./PRUEBA2/diagramas/diagramadespliegue.png)           | 
+| Diagrama de componentes            | [Diagrama de componentes](./PRUEBA2/diagramadecomponentes.png)         | 
+| Diagrama de secuencia              | [Diagrama de secuencia](./PRUEBA2/diagramadesecuencia.png)           | 
+| Casos de prueba                    | [Casos de prueba.md](./PRUEBA2/docs/CasosDePrueba)          | 
+| Deuda técnica / code smells        | [Deuda Tecnica](./PRUEBA2/docs/DeudaTecnica.md)           | 
 
   
 
@@ -48,15 +48,15 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 ### Variables de entorno 
 
-[Ver las variables de entorno](Variables.md)
+[Ver las variables de entorno](./MDS/Variables.md)
 
 ### Instalación y ejecución (sin Docker) 
 
-[Ver instalacion y ejecucion sin docker](SinDocker.md)
+[Ver instalacion y ejecucion sin docker](./MDS/SinDocker.md)
 
 ### Instalación y ejecución (con Docker)  <!-- si aplica (bonus) --> 
 
-[Ver instalacion y ejecucion con docker](ConDocker.md)
+[Ver instalacion y ejecucion con docker](./MDS/ConDocker.md)
 
 ## Bonus (opcional) 
 
@@ -66,7 +66,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 ## Tecnologias:
 
-[Ver tecnologias](Tecnologias.md)
+[Ver tecnologias](./MDS/Tecnologias.md)
 
 ## Responsabilidades del equipo 
 
