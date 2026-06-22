@@ -10,11 +10,8 @@
 
 ## Historia de usuario implementada 
 
-| ID    | Nombre                    | Issue | 
-
-|-------|---------------------------|-------| 
-
-| US-XX | [nombre]                  | #N    | 
+| US - 02 | [Fragmentación de proyectos en subtareas](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/3)               |   2   |
+| US - 09 | [Personalización de la mascota](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/10)                        |   9   |
 
 (Debe integrar: búsqueda con filtro, CRUD de una entidad y transacción que une 2+ entidades) 
 
