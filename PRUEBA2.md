@@ -61,7 +61,7 @@
 
 ## Tecnologias:
 
-[Ver tecnologias]()
+[Ver tecnologias](Tecnologias.md)
 
 ## Responsabilidades del equipo 
 
