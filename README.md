@@ -1,20 +1,20 @@
 # Nuestro Proyecto
-# Problemática:
+## Problemática:
 
 Una gran problemática en el ámbito universitario es la gestión ineficiente del tiempo, lo que provoca procrastinación por parte de los estudiantes y un aumento en los niveles de estrés académico. Los estudiantes enfrentan una desconexión crítica entre la planificación y la ejecución diaria. Esta desorganización no solo compromete el rendimiento en evaluaciones, sino que también genera una sensación de parálisis frente a objetivos complejos.
 
-# Solución del problema:
+## Solución del problema:
 
 Nuestra propuesta consiste en una aplicación que automatiza la planificación diaria para que el estudiante no tenga que decidir qué hacer en cada momento. El software distribuye las tareas pendientes en un calendario inteligente, asignando bloques específicos tanto para el estudio como para el descanso necesario.
 
 Para asegurar que el usuario siga este plan, el sistema relaciona el progreso académico con la vida de una mascota virtual. Al cumplir con los objetivos establecidos, la mascota permanece saludable; pero, si el usuario posterga sus deberes, esta mostrará signos de descuido y enviará alertas sobre su estado anímico. De este modo, se sustituye la presión tradicional por un sistema de cuidado y responsabilidad personal.
 
-# PRUEBA 2
+## PRUEBA 2
 
 [Ver contenido de la prueba 2](PRUEBA2.md)
 
 
-# Historias de usuarios epicas:
+## Historias de usuarios epicas:
 
 | ID      | Nombre                                                                                                                     | Issue |
 | :------ | :------------------------------------------------------------------------------------------------------------------------  | :---- |
@@ -22,7 +22,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | US - 02 | [Gestión de la atención y enfoque](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/14)                             |   2   |
 | US - 03 | [Motor de inteligencia predictiva y autoconocimiento temporal](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/15) |   3   |
 
-# Historias de usuarios:
+## Historias de usuarios:
 
 | ID      | Nombre                                                                                                             | Issue |
 | :------ | :----------------------------------------------------------------------------------------------------------------- | :---- |
@@ -37,27 +37,27 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | US - 09 | [Personalización de la mascota](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/10)                        |   9   |
 | US - 10 | [Sistema de alertas emocionales (notificaciones)](https://github.com/HappyGhast99/Nuestro-Proyecto/issues/11)      |   10  |
 
-# Diseño Arquitectónico: 
+## Diseño Arquitectónico: 
 
 [Ver Diseño Arquitectónico](Arquitectura.md)
 
-# Requisitos Extrafuncionales:
+## Requisitos Extrafuncionales:
 
 [Ver Requisitos Extrafuncionales](ReqExtrafuncionales.md)
 
-# Entidades del dominio:
+## Entidades del dominio:
 
 [Ver Entidades del dominio](Entidadesdedominio.md)
 
-# Figma:
+## Figma:
 
 [Focuspets](https://www.figma.com/design/Wo9LP4ZsXVFpqH7CqpHS1T/FocusPet-Home?node-id=0-1&p=f&t=JbesrMftXTk4cdNU-0)
 
-# Link de Clarita Review:
+## Link de Clarita Review:
 
 [LINK](https://chatgpt.com/share/6a1e80bb-6f58-83e9-a592-1f2c1e07fd7d)
   
-# Integrantes de la organización:
+## Integrantes de la organización:
 
 | Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
 | :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
