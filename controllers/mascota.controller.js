@@ -4,7 +4,7 @@ class MascotaController {
   /**
    * Obtiene la mascota asociada al usuario.
    */
-  obtenerMascota(req, res) {
+  async obtenerMascota(req, res) {
     try {
       const usuarioId = parseInt(req.params.usuarioId, 10);
       if (isNaN(usuarioId)) {
@@ -12,12 +12,12 @@ class MascotaController {
       }
 
       // Validar si el usuario existe
-      const usuario = mascotaService.obtenerUsuarioPorId(usuarioId);
+      const usuario = await mascotaService.obtenerUsuarioPorId(usuarioId);
       if (!usuario) {
         return res.status(404).json({ error: 'Usuario no encontrado' });
       }
 
-      const mascota = mascotaService.obtenerMascotaPorUsuario(usuarioId);
+      const mascota = await mascotaService.obtenerMascotaPorUsuario(usuarioId);
       if (!mascota) {
         return res.status(404).json({ 
           hasPet: false, 
@@ -38,7 +38,7 @@ class MascotaController {
   /**
    * Registra una nueva mascota para el usuario.
    */
-  registrarMascota(req, res) {
+  async registrarMascota(req, res) {
     try {
       const usuarioId = parseInt(req.params.usuarioId, 10);
       if (isNaN(usuarioId)) {
@@ -48,7 +48,7 @@ class MascotaController {
       const { nombre_mascota, tipo_mascota } = req.body;
 
       // Validar si el usuario existe
-      const usuario = mascotaService.obtenerUsuarioPorId(usuarioId);
+      const usuario = await mascotaService.obtenerUsuarioPorId(usuarioId);
       if (!usuario) {
         return res.status(404).json({ error: 'Usuario no encontrado' });
       }
@@ -64,13 +64,13 @@ class MascotaController {
       }
 
       // Validar si el usuario ya tiene mascota
-      const mascotaExistente = mascotaService.obtenerMascotaPorUsuario(usuarioId);
+      const mascotaExistente = await mascotaService.obtenerMascotaPorUsuario(usuarioId);
       if (mascotaExistente) {
         return res.status(400).json({ error: 'El usuario ya tiene una mascota asignada' });
       }
 
       // Crear la mascota
-      const nuevaMascota = mascotaService.crearMascota(
+      const nuevaMascota = await mascotaService.crearMascota(
         usuarioId,
         nombre_mascota.trim(),
         tipo_mascota
@@ -86,7 +86,7 @@ class MascotaController {
   /**
    * Elimina la mascota asociada al usuario.
    */
-  eliminarMascota(req, res) {
+  async eliminarMascota(req, res) {
     try {
       const usuarioId = parseInt(req.params.usuarioId, 10);
       if (isNaN(usuarioId)) {
@@ -94,19 +94,19 @@ class MascotaController {
       }
 
       // Validar si el usuario existe
-      const usuario = mascotaService.obtenerUsuarioPorId(usuarioId);
+      const usuario = await mascotaService.obtenerUsuarioPorId(usuarioId);
       if (!usuario) {
         return res.status(404).json({ error: 'Usuario no encontrado' });
       }
 
       // Validar si el usuario tiene una mascota
-      const mascota = mascotaService.obtenerMascotaPorUsuario(usuarioId);
+      const mascota = await mascotaService.obtenerMascotaPorUsuario(usuarioId);
       if (!mascota) {
         return res.status(404).json({ error: 'El usuario no tiene una mascota asignada' });
       }
 
       // Eliminar la mascota
-      mascotaService.eliminarMascota(usuarioId);
+      await mascotaService.eliminarMascota(usuarioId);
 
       res.status(200).json({ mensaje: 'Mascota eliminada exitosamente' });
     } catch (error) {
@@ -116,4 +116,5 @@ class MascotaController {
   }
 }
 
+// Export a new instance of the class
 module.exports = new MascotaController();

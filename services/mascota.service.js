@@ -4,19 +4,21 @@ class MascotaService {
   /**
    * Obtiene un usuario por su ID.
    * @param {number} usuarioId 
-   * @returns {object|undefined}
+   * @returns {Promise<object|null>}
    */
-  obtenerUsuarioPorId(usuarioId) {
-    return db.prepare('SELECT * FROM usuarios WHERE id = ?').get(usuarioId);
+  async obtenerUsuarioPorId(usuarioId) {
+    const res = await db.query('SELECT * FROM usuarios WHERE id = $1', [usuarioId]);
+    return res.rows[0] || null;
   }
 
   /**
    * Obtiene la mascota asociada a un usuario.
    * @param {number} usuarioId 
-   * @returns {object|undefined}
+   * @returns {Promise<object|null>}
    */
-  obtenerMascotaPorUsuario(usuarioId) {
-    return db.prepare('SELECT * FROM mascotas WHERE usuario_id = ?').get(usuarioId);
+  async obtenerMascotaPorUsuario(usuarioId) {
+    const res = await db.query('SELECT * FROM mascotas WHERE usuario_id = $1', [usuarioId]);
+    return res.rows[0] || null;
   }
 
   /**
@@ -24,15 +26,16 @@ class MascotaService {
    * @param {number} usuarioId 
    * @param {string} nombreMascota 
    * @param {string} tipoMascota 
-   * @returns {object} Detalle de la mascota creada
+   * @returns {Promise<object>} Detalle de la mascota creada
    */
-  crearMascota(usuarioId, nombreMascota, tipoMascota) {
-    const info = db.prepare(
-      'INSERT INTO mascotas (usuario_id, nombre_mascota, tipo_mascota, nivel, salud) VALUES (?, ?, ?, 1, 100)'
-    ).run(usuarioId, nombreMascota, tipoMascota);
+  async crearMascota(usuarioId, nombreMascota, tipoMascota) {
+    const res = await db.query(
+      'INSERT INTO mascotas (usuario_id, nombre_mascota, tipo_mascota, nivel, salud) VALUES ($1, $2, $3, 1, 100) RETURNING id',
+      [usuarioId, nombreMascota, tipoMascota]
+    );
     
     return {
-      id: info.lastInsertRowid,
+      id: res.rows[0].id,
       usuario_id: usuarioId,
       nombre_mascota: nombreMascota,
       tipo_mascota: tipoMascota,
@@ -44,11 +47,11 @@ class MascotaService {
   /**
    * Elimina la mascota asociada a un usuario.
    * @param {number} usuarioId 
-   * @returns {number} Número de filas eliminadas
+   * @returns {Promise<number>} Número de filas eliminadas
    */
-  eliminarMascota(usuarioId) {
-    const info = db.prepare('DELETE FROM mascotas WHERE usuario_id = ?').run(usuarioId);
-    return info.changes;
+  async eliminarMascota(usuarioId) {
+    const res = await db.query('DELETE FROM mascotas WHERE usuario_id = $1', [usuarioId]);
+    return res.rowCount;
   }
 }
 

@@ -1,15 +1,26 @@
+require('dotenv').config();
 const express      = require('express');
+const cors         = require('cors');
 const db           = require('./db');
+const { initDb }   = db;
 const swaggerUi    = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
+const gamificationRoutes = require('./src/routes/GamificationRoutes');
+const activityRoutes = require('./src/routes/ActivityRoutes'); // Importar nuevas rutas
+const mascotaRouter = require('./routes/mascota'); // Enrutador de mascotas
 
 const app = express();
+app.use(cors({
+  origin: '*', // Permitir desde cualquier origen para desarrollo, o restringirlo a http://localhost:3001
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
-app.use(express.static('public'));
 
 // Cargar enrutador de mascotas
-const mascotaRouter = require('./routes/mascota');
 app.use('/api', mascotaRouter);
+app.use('/api', gamificationRoutes);
+app.use('/cursos', activityRoutes); // Usar las nuevas rutas de actividad
 
 const swaggerSpec = swaggerJsdoc({
   definition: {
@@ -20,109 +31,12 @@ const swaggerSpec = swaggerJsdoc({
       { url: 'http://localhost:3000',            description: 'Local' }
     ]
   },
-  apis: ['./index.js', './routes/*.js']
+  apis: ['./index.js', './src/routes/*.js', './routes/*.js'] // Incluir rutas para Swagger
 });
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-/**
- * @swagger
- * /cursos:
- *   get:
- *     summary: Lista todos los cursos
- *     responses:
- *       200:
- *         description: Array de cursos
- */
-app.get('/cursos', (req, res) => {
-  res.json(db.prepare('SELECT * FROM cursos').all());
-});
-
-/**
- * @swagger
- * /cursos:
- *   post:
- *     summary: Crea un nuevo curso
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               nombre:     { type: string }
- *               instructor: { type: string }
- *               creditos:   { type: integer }
- *     responses:
- *       201:
- *         description: Curso creado
- */
-app.post('/cursos', (req, res) => {
-  const { nombre, instructor, creditos } = req.body;
-  const r = db.prepare(
-    'INSERT INTO cursos (nombre, instructor, creditos) VALUES (?, ?, ?)'
-  ).run(nombre, instructor, creditos);
-  res.status(201).json({ id: r.lastInsertRowid, nombre, instructor, creditos });
-});
-
-/**
- * @swagger
- * /cursos/{id}:
- *   put:
- *     summary: Modifica un curso
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: integer }
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               nombre:     { type: string }
- *               instructor: { type: string }
- *               creditos:   { type: integer }
- *     responses:
- *       200:
- *         description: Curso actualizado
- *       404:
- *         description: No encontrado
- */
-app.put('/cursos/:id', (req, res) => {
-  const { nombre, instructor, creditos } = req.body;
-  const i = db.prepare(
-    'UPDATE cursos SET nombre=?, instructor=?, creditos=? WHERE id=?'
-  ).run(nombre, instructor, creditos, req.params.id);
-  if (i.changes === 0) return res.status(404).json({ error: 'Curso no encontrado' });
-  res.json({ mensaje: 'Curso actualizado' });
-});
-
-/**
- * @swagger
- * /cursos/{id}:
- *   delete:
- *     summary: Elimina un curso
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema: { type: integer }
- *     responses:
- *       200:
- *         description: Curso eliminado
- *       404:
- *         description: No encontrado
- */
-app.delete('/cursos/:id', (req, res) => {
-  const i = db.prepare('DELETE FROM cursos WHERE id=?').run(req.params.id);
-  if (i.changes === 0) return res.status(404).json({ error: 'Curso no encontrado' });
-  res.json({ mensaje: 'Curso eliminado' });
-});
-
 // =================================================================
-// ENDPOINTS DE INCENTIVOS, RECOMPENSAS Y SUBTAREAS
+// ENDPOINTS DE INCENTIVOS, RECOMPENSAS Y SUBTAREAS (MIGRADOS A POSTGRESQL)
 // =================================================================
 
 /**
@@ -143,18 +57,22 @@ app.delete('/cursos/:id', (req, res) => {
  *       201:
  *         description: Mini-logro otorgado
  */
-app.post('/arranque/completar', (req, res) => {
+app.post('/arranque/completar', async (req, res) => {
   const { duracion } = req.body;
   if (!duracion || (duracion !== 5 && duracion !== 10)) {
     return res.status(400).json({ error: 'La duración debe ser 5 o 10 minutos.' });
   }
   const descripcion = `Superada la inercia inicial: Sesión de ${duracion} minutos completada`;
-  const r = db.prepare('INSERT INTO mini_logros (descripcion) VALUES (?)').run(descripcion);
-  res.status(201).json({
-    id: r.lastInsertRowid,
-    mensaje: 'Mini-logro otorgado',
-    logro: descripcion
-  });
+  try {
+    const r = await db.query('INSERT INTO mini_logros (descripcion) VALUES ($1) RETURNING id', [descripcion]);
+    res.status(201).json({
+      id: r.rows[0].id,
+      mensaje: 'Mini-logro otorgado',
+      logro: descripcion
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -166,9 +84,13 @@ app.post('/arranque/completar', (req, res) => {
  *       200:
  *         description: Lista de mini-logros
  */
-app.get('/mini-logros', (req, res) => {
-  const logros = db.prepare('SELECT * FROM mini_logros ORDER BY fecha DESC').all();
-  res.json(logros);
+app.get('/mini-logros', async (req, res) => {
+  try {
+    const logros = await db.query('SELECT * FROM mini_logros ORDER BY fecha DESC');
+    res.json(logros.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -192,7 +114,7 @@ app.get('/mini-logros', (req, res) => {
  *       201:
  *         description: Tarea creada
  */
-app.post('/tareas', (req, res) => {
+app.post('/tareas', async (req, res) => {
   const { titulo, descripcion, recompensa, duracion_bloque, proyecto_grande } = req.body;
   if (!titulo || typeof titulo !== 'string' || !titulo.trim() || !recompensa || typeof recompensa !== 'string' || !recompensa.trim()) {
     return res.status(400).json({ error: 'El título y la recompensa son obligatorios y deben ser textos no vacíos.' });
@@ -201,41 +123,47 @@ app.post('/tareas', (req, res) => {
     return res.status(400).json({ error: 'La duración del bloque es obligatoria y debe ser un número entero positivo mayor a 0.' });
   }
   
-  const r = db.prepare(
-    'INSERT INTO tareas (titulo, descripcion, recompensa, duracion_bloque) VALUES (?, ?, ?, ?)'
-  ).run(titulo.trim(), (descripcion || '').trim(), recompensa.trim(), duracion_bloque);
-  const newTaskId = r.lastInsertRowid;
+  try {
+    const r = await db.query(
+      'INSERT INTO tareas (titulo, descripcion, recompensa, duracion_bloque) VALUES ($1, $2, $3, $4) RETURNING id',
+      [titulo.trim(), (descripcion || '').trim(), recompensa.trim(), duracion_bloque]
+    );
+    const newTaskId = r.rows[0].id;
 
-  const subtareasCreadas = [];
-  if (proyecto_grande) {
-    const baseSubtareas = [
-      `Preparar material para ${titulo.trim()}`,
-      `Desarrollar núcleo principal de ${titulo.trim()}`,
-      `Revisar y finalizar ${titulo.trim()}`
-    ];
-    for (const desc of baseSubtareas) {
-      const rSub = db.prepare(
-        'INSERT INTO subtareas (tarea_id, descripcion, estado) VALUES (?, ?, ?)'
-      ).run(newTaskId, desc, 'pendiente');
-      subtareasCreadas.push({
-        id: rSub.lastInsertRowid,
-        tarea_id: newTaskId,
-        descripcion: desc,
-        estado: 'pendiente'
-      });
+    const subtareasCreadas = [];
+    if (proyecto_grande) {
+      const baseSubtareas = [
+        `Preparar material para ${titulo.trim()}`,
+        `Desarrollar núcleo principal de ${titulo.trim()}`,
+        `Revisar y finalizar ${titulo.trim()}`
+      ];
+      for (const desc of baseSubtareas) {
+        const rSub = await db.query(
+          'INSERT INTO subtareas (tarea_id, descripcion, estado) VALUES ($1, $2, $3) RETURNING id',
+          [newTaskId, desc, 'pendiente']
+        );
+        subtareasCreadas.push({
+          id: rSub.rows[0].id,
+          tarea_id: newTaskId,
+          descripcion: desc,
+          estado: 'pendiente'
+        });
+      }
     }
-  }
 
-  res.status(201).json({
-    id: newTaskId,
-    titulo: titulo.trim(),
-    descripcion: (descripcion || '').trim(),
-    recompensa: recompensa.trim(),
-    duracion_bloque,
-    estado: 'pendiente',
-    desglosada: !!proyecto_grande,
-    subtareas: subtareasCreadas
-  });
+    res.status(201).json({
+      id: newTaskId,
+      titulo: titulo.trim(),
+      descripcion: (descripcion || '').trim(),
+      recompensa: recompensa.trim(),
+      duracion_bloque,
+      estado: 'pendiente',
+      desglosada: !!proyecto_grande,
+      subtareas: subtareasCreadas
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -247,9 +175,13 @@ app.post('/tareas', (req, res) => {
  *       200:
  *         description: Lista de tareas
  */
-app.get('/tareas', (req, res) => {
-  const lista = db.prepare('SELECT * FROM tareas').all();
-  res.json(lista);
+app.get('/tareas', async (req, res) => {
+  try {
+    const lista = await db.query('SELECT * FROM tareas');
+    res.json(lista.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -268,17 +200,22 @@ app.get('/tareas', (req, res) => {
  *       404:
  *         description: Tarea no encontrada
  */
-app.put('/tareas/:id/completar', (req, res) => {
+app.put('/tareas/:id/completar', async (req, res) => {
   const tareaId = req.params.id;
-  const tarea = db.prepare('SELECT * FROM tareas WHERE id = ?').get(tareaId);
-  if (!tarea) {
-    return res.status(404).json({ error: 'Tarea no encontrada.' });
+  try {
+    const result = await db.query('SELECT * FROM tareas WHERE id = $1', [tareaId]);
+    const tarea = result.rows[0] || null;
+    if (!tarea) {
+      return res.status(404).json({ error: 'Tarea no encontrada.' });
+    }
+    await db.query("UPDATE tareas SET estado = 'completada' WHERE id = $1", [tareaId]);
+    res.json({
+      mensaje: 'Tarea completada con éxito',
+      recompensa: tarea.recompensa
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-  db.prepare("UPDATE tareas SET estado = 'completada' WHERE id = ?").run(tareaId);
-  res.json({
-    mensaje: 'Tarea completada con éxito',
-    recompensa: tarea.recompensa
-  });
 });
 
 /**
@@ -297,36 +234,42 @@ app.put('/tareas/:id/completar', (req, res) => {
  *       404:
  *         description: Tarea no encontrada
  */
-app.post('/tareas/:id/desglosar', (req, res) => {
+app.post('/tareas/:id/desglosar', async (req, res) => {
   const tareaId = req.params.id;
-  const tarea = db.prepare('SELECT * FROM tareas WHERE id = ?').get(tareaId);
-  if (!tarea) {
-    return res.status(404).json({ error: 'Tarea no encontrada.' });
-  }
-  
-  const baseSubtareas = [
-    `Preparar material para ${tarea.titulo}`,
-    `Desarrollar núcleo principal de ${tarea.titulo}`,
-    `Revisar y finalizar ${tarea.titulo}`
-  ];
+  try {
+    const result = await db.query('SELECT * FROM tareas WHERE id = $1', [tareaId]);
+    const tarea = result.rows[0] || null;
+    if (!tarea) {
+      return res.status(404).json({ error: 'Tarea no encontrada.' });
+    }
+    
+    const baseSubtareas = [
+      `Preparar material para ${tarea.titulo}`,
+      `Desarrollar núcleo principal de ${tarea.titulo}`,
+      `Revisar y finalizar ${tarea.titulo}`
+    ];
 
-  const creadas = [];
-  for (const desc of baseSubtareas) {
-    const r = db.prepare(
-      'INSERT INTO subtareas (tarea_id, descripcion, estado) VALUES (?, ?, ?)'
-    ).run(tareaId, desc, 'pendiente');
-    creadas.push({
-      id: r.lastInsertRowid,
+    const creadas = [];
+    for (const desc of baseSubtareas) {
+      const r = await db.query(
+        'INSERT INTO subtareas (tarea_id, descripcion, estado) VALUES ($1, $2, $3) RETURNING id',
+        [tareaId, desc, 'pendiente']
+      );
+      creadas.push({
+        id: r.rows[0].id,
+        tarea_id: Number(tareaId),
+        descripcion: desc,
+        estado: 'pendiente'
+      });
+    }
+
+    res.status(201).json({
       tarea_id: Number(tareaId),
-      descripcion: desc,
-      estado: 'pendiente'
+      subtareas: creadas
     });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-
-  res.status(201).json({
-    tarea_id: Number(tareaId),
-    subtareas: creadas
-  });
 });
 
 /**
@@ -354,7 +297,7 @@ app.post('/tareas/:id/desglosar', (req, res) => {
  *       404:
  *         description: Subtarea no encontrada
  */
-app.put('/subtareas/:id/estado', (req, res) => {
+app.put('/subtareas/:id/estado', async (req, res) => {
   const { estado } = req.body;
   const subtareaId = req.params.id;
 
@@ -362,31 +305,38 @@ app.put('/subtareas/:id/estado', (req, res) => {
     return res.status(400).json({ error: 'El estado debe ser pendiente o completada.' });
   }
 
-  const subtarea = db.prepare('SELECT * FROM subtareas WHERE id = ?').get(subtareaId);
-  if (!subtarea) {
-    return res.status(404).json({ error: 'Subtarea no encontrada.' });
-  }
-
-  db.prepare('UPDATE subtareas SET estado = ? WHERE id = ?').run(estado, subtareaId);
-
-  let primerPasoRecompensado = false;
-  if (estado === 'completada') {
-    const totalCompletadas = db.prepare(
-      "SELECT COUNT(*) as count FROM subtareas WHERE tarea_id = ? AND estado = 'completada'"
-    ).get(subtarea.tarea_id).count;
-
-    if (totalCompletadas === 1) {
-      primerPasoRecompensado = true;
+  try {
+    const result = await db.query('SELECT * FROM subtareas WHERE id = $1', [subtareaId]);
+    const subtarea = result.rows[0] || null;
+    if (!subtarea) {
+      return res.status(404).json({ error: 'Subtarea no encontrada.' });
     }
-  }
 
-  res.json({
-    mensaje: 'Estado de subtarea actualizado.',
-    subtarea_id: Number(subtareaId),
-    nuevo_estado: estado,
-    tarea_principal_id: subtarea.tarea_id,
-    primer_paso_recompensado: primerPasoRecompensado
-  });
+    await db.query('UPDATE subtareas SET estado = $1 WHERE id = $2', [estado, subtareaId]);
+
+    let primerPasoRecompensado = false;
+    if (estado === 'completada') {
+      const countRes = await db.query(
+        "SELECT COUNT(*) as count FROM subtareas WHERE tarea_id = $1 AND estado = 'completada'",
+        [subtarea.tarea_id]
+      );
+      const totalCompletadas = parseInt(countRes.rows[0].count, 10);
+
+      if (totalCompletadas === 1) {
+        primerPasoRecompensado = true;
+      }
+    }
+
+    res.json({
+      mensaje: 'Estado de subtarea actualizado.',
+      subtarea_id: Number(subtareaId),
+      nuevo_estado: estado,
+      tarea_principal_id: subtarea.tarea_id,
+      primer_paso_recompensado: primerPasoRecompensado
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -403,10 +353,14 @@ app.put('/subtareas/:id/estado', (req, res) => {
  *       200:
  *         description: Lista de subtareas
  */
-app.get('/subtareas/tarea/:tarea_id', (req, res) => {
+app.get('/subtareas/tarea/:tarea_id', async (req, res) => {
   const { tarea_id } = req.params;
-  const lista = db.prepare('SELECT * FROM subtareas WHERE tarea_id = ?').all(tarea_id);
-  res.json(lista);
+  try {
+    const lista = await db.query('SELECT * FROM subtareas WHERE tarea_id = $1', [tarea_id]);
+    res.json(lista.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /**
@@ -425,11 +379,24 @@ app.get('/subtareas/tarea/:tarea_id', (req, res) => {
  *       404:
  *         description: Tarea no encontrada
  */
-app.delete('/tareas/:id', (req, res) => {
+app.delete('/tareas/:id', async (req, res) => {
   const tareaId = req.params.id;
-  const i = db.prepare('DELETE FROM tareas WHERE id=?').run(tareaId);
-  if (i.changes === 0) return res.status(404).json({ error: 'Tarea no encontrada.' });
-  res.json({ mensaje: 'Tarea eliminada' });
+  try {
+    const i = await db.query('DELETE FROM tareas WHERE id = $1', [tareaId]);
+    if (i.rowCount === 0) return res.status(404).json({ error: 'Tarea no encontrada.' });
+    res.json({ mensaje: 'Tarea eliminada' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
-app.listen(3000, () => console.log('API en http://localhost:3000'));
+const PORT = process.env.PORT || 3000;
+initDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    console.log(`Swagger docs available at http://localhost:${PORT}/docs`);
+  });
+}).catch(err => {
+  console.error('Failed to initialize database:', err);
+  process.exit(1);
+});
