@@ -53,27 +53,13 @@
 
 docker-compose up --build 
 
-  
-
-## Responsabilidades del equipo 
-
-| Integrante | Rol(es) | Ítems de la rúbrica a cargo | 
-
-|------------|---------|-----------------------------| 
-
-| [Nombre 1] | [Rol]   | [Ítems]                     | 
-
-| [Nombre 2] | [Rol]   | [Ítems]                     | 
-
-  
-
 ## Bonus (opcional) 
 
 - Contenedores: [sí/no] — docker-compose en ./docker-compose.yml 
 
 - Spec-driven development: [sí/no] — especificaciones en ./openspecs/ 
 
-# Tecnologias:
+## Tecnologias:
 
 *Backend y base de datos*
 
@@ -96,7 +82,7 @@ docker-compose up --build
 - OpenSpec: Framework de diseño y especificación técnica que nos permitió estructurar las propuestas (proposal.md, design.md), archivar los cambios históricos y gestionar las decisiones de diseño mediante skills personalizadas.
 - Thunder Client / Postman: Herramientas utilizadas para realizar las pruebas manuales de caja negra en los endpoints.
 
-# Integrantes de la organización:
+## Responsabilidades del equipo 
 
 | Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
 | :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
