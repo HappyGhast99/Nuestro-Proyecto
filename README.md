@@ -60,10 +60,10 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 | Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
 | :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
-| Antonia Bustamante Borquez | Product Owner | Desarrollador Backend - API 2.                                                                |
+| Antonia Bustamante Borquez | Product Owner | Analista de Requerimientos.                                                                   |
 | Joaquin Bustamante Ramirez | Developers    | Ingeniero de Pruebas (QA).                                                                    |
 | Fernanda Cerda Toledo      | Developers    | Desarrolladora Backend - API 1.                                                               |
-| Martin Duran Salinas       | Scrum Master  | Analista de Requerimientos.                                                                   |
+| Martin Duran Salinas       | Scrum Master  | Desarrollador Backend - API 2.                                                                |
 | Matthew Osorio Muñoz       | Developers    | Integrador y Gestor del Repositorio.                                                          |
 
 
