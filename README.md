@@ -9,6 +9,11 @@ Nuestra propuesta consiste en una aplicación que automatiza la planificación d
 
 Para asegurar que el usuario siga este plan, el sistema relaciona el progreso académico con la vida de una mascota virtual. Al cumplir con los objetivos establecidos, la mascota permanece saludable; pero, si el usuario posterga sus deberes, esta mostrará signos de descuido y enviará alertas sobre su estado anímico. De este modo, se sustituye la presión tradicional por un sistema de cuidado y responsabilidad personal.
 
+# PRUEBA 2
+
+[Ver contenido de la prueba 2](PRUEBA2.md)
+
+
 # Historias de usuarios epicas:
 
 | ID      | Nombre                                                                                                                     | Issue |
@@ -51,19 +56,15 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 # Link de Clarita Review:
 
 [LINK](https://chatgpt.com/share/6a1e80bb-6f58-83e9-a592-1f2c1e07fd7d)
-
-# Imagenes de testeo sobre API subtareas:
-
-[Imagenes](./imagenes) (10)
-
+  
 # Integrantes de la organización:
 
 | Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
 | :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
-| Antonia Bustamante Borquez | Product Owner | Desarrollador Backend - API 2.                                                                |
+| Antonia Bustamante Borquez | Product Owner | Analista de Requerimientos.                                                                   |
 | Joaquin Bustamante Ramirez | Developers    | Ingeniero de Pruebas (QA).                                                                    |
 | Fernanda Cerda Toledo      | Developers    | Desarrolladora Backend - API 1.                                                               |
-| Martin Duran Salinas       | Scrum Master  | Analista de Requerimientos.                                                                   |
+| Martin Duran Salinas       | Scrum Master  | Desarrollador Backend - API 2.                                                                |
 | Matthew Osorio Muñoz       | Developers    | Integrador y Gestor del Repositorio.                                                          |
 
 

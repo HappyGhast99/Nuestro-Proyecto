@@ -1,83 +1,1381 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Gamificación</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusPets - Incentivos, Tareas y Mascota Virtual</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet para Tareas -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Estilos para la Mascota e Integración -->
+  <style>
+    :root {
+      --card-bg-pet: rgba(255, 255, 255, 0.04);
+      --card-border-pet: rgba(255, 255, 255, 0.08);
+      --card-border-active-pet: rgba(147, 51, 234, 0.6);
+      --primary-pet: #9333ea;
+      --primary-glow-pet: rgba(147, 51, 234, 0.35);
+      --primary-hover-pet: #a855f7;
+      --accent-green-pet: #10b981;
+      --accent-red-pet: #ef4444;
+    }
+
+    /* Sobrescribir contenedor principal para soportar 4 columnas */
+    .container {
+      max-width: 1700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1.1fr 1.3fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1400px) {
+      .container {
+        grid-template-columns: 1.2fr 1fr 1.2fr;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animaciones */
+    @keyframes pulse-pet {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes float-pet {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+
+    /* Pantalla de Selección de Mascota */
+    .selection-view, .preview-view, .dashboard-view {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .pets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+
+    .pet-card {
+      background: var(--card-bg-pet);
+      border: 1px solid var(--card-border-pet);
+      border-radius: 12px;
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pet-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .pet-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    .pet-card:hover::before {
+      opacity: 1;
+    }
+
+    .pet-card.selected {
+      border-color: var(--card-border-active-pet);
+      background: rgba(147, 51, 234, 0.08);
+      box-shadow: 0 0 15px var(--primary-glow-pet);
+    }
+
+    .pet-card svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 8px;
+      z-index: 1;
+    }
+
+    .pet-card.selected svg {
+      animation: pulse-pet 2s infinite ease-in-out;
+    }
+
+    .pet-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-bottom: 2px;
+      z-index: 1;
+    }
+
+    .pet-card p {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: center;
+      z-index: 1;
+      line-height: 1.3;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    /* Vista de Atributos / Vista Previa */
+    .preview-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .preview-card-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border-pet);
+      border-radius: 12px;
+      padding: 14px;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .preview-svg-container {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 75%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-svg-container svg {
+      width: 75px;
+      height: 75px;
+      animation: float-pet 4s ease-in-out infinite;
+    }
+
+    .preview-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .preview-details h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      color: #fff;
+    }
+
+    .preview-badge {
+      align-self: center;
+      padding: 3px 8px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #c7d2fe;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    .preview-attributes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .attribute-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 6px 8px;
+    }
+
+    .attribute-label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .attribute-value {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-top: 2px;
+    }
+
+    /* Dashboard de Mascota Activa */
+    .pet-display {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 75%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .pet-display svg {
+      width: 100px;
+      height: 100px;
+      animation: float-pet 4s ease-in-out infinite;
+    }
+
+    .pet-info {
+      text-align: center;
+    }
+
+    .pet-info h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 3px;
+    }
+
+    .pet-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(147, 51, 234, 0.2);
+      border: 1px solid rgba(147, 51, 234, 0.4);
+      color: #d8b4fe;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stats-card {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border-pet);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .stat-name {
+      color: #d1d5db;
+    }
+
+    .stat-value {
+      font-weight: 700;
+    }
+
+    .bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .health-fill {
+      background: linear-gradient(90deg, #ef4444, #f43f5e);
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    }
+
+    .exp-fill {
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Alerta/Notificaciones (Toast de Mascota) */
+    .toast-pet {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 14px 20px;
+      background: #19163b;
+      border-left: 4px solid var(--accent-red-pet);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 2000;
+      animation: fadeIn 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .toast-pet-msg {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f3f4f6;
+    }
+
+    .toast-pet-close {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: bold;
+    }
+
+    .toast-pet-close:hover {
+      color: #fff;
+    }
+
+    /* Botón Eliminar / Liberar mascota */
+    .btn-liberar-pet {
+      padding: 10px 16px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 8px;
+      color: #fca5a5;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+      width: 100%;
+    }
+
+    .btn-liberar-pet:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: rgba(239, 68, 68, 0.6);
+      color: #fecaca;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-liberar-pet svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+    }
+
+    .modal-box {
+      background: rgba(15, 10, 30, 0.97);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-icon-pet {
+      width: 44px;
+      height: 44px;
+      background: rgba(239, 68, 68, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .modal-icon-pet svg {
+      width: 22px;
+      height: 22px;
+      color: #ef4444;
+    }
+
+    .modal-box h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-bottom: 6px;
+    }
+
+    .modal-box p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .modal-box .pet-name-highlight {
+      color: #fca5a5;
+      font-weight: 700;
+    }
+
+    .modal-actions-pet {
+      display: flex;
+      gap: 8px;
+    }
+
+    .modal-actions-pet .btn {
+      flex: 1;
+      padding: 8px;
+      font-size: 0.85rem;
+    }
+
+    .modal-actions-pet .btn-confirm-delete {
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-actions-pet .btn-confirm-delete:hover {
+      background: #dc2626;
+      box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Selector de Usuarios Flotante */
+    .user-switcher {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 1005;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .user-switcher-toggle {
+      background: rgba(20, 14, 40, 0.95);
+      border: 1px solid rgba(147, 51, 234, 0.5);
+      border-radius: 50px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.3);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .user-switcher-toggle:hover {
+      border-color: var(--primary-pet);
+      box-shadow: 0 6px 24px rgba(147, 51, 234, 0.5);
+    }
+
+    .user-switcher-toggle .avatar {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #9333ea, #6366f1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.75rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .user-switcher-toggle .user-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      max-width: 90px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-switcher-toggle .chevron {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      transition: transform 0.3s ease;
+    }
+
+    .user-switcher-toggle.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .user-list {
+      background: rgba(15, 10, 30, 0.97);
+      border: 1px solid rgba(147, 51, 234, 0.3);
+      border-radius: 12px;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(16px);
+      width: 190px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .user-list-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 8px;
+    }
+
+    .user-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .user-item:hover {
+      background: rgba(147, 51, 234, 0.12);
+    }
+
+    .user-item.active-user {
+      background: rgba(147, 51, 234, 0.18);
+      border: 1px solid rgba(147, 51, 234, 0.35);
+    }
+
+    .user-item .ui-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .user-item .ui-info {
+      flex: 1;
+    }
+
+    .user-item .ui-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .user-item .ui-pet-status {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .user-item .ui-active-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      flex-shrink: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Panel de Disciplina</h1>
-        
-        <div class="profile-card">
-            <h2 id="username">Cargando...</h2>
-            <div class="stats">
-                <div class="stat-item">
-                    <span>XP Total:</span>
-                    <span id="total-xp">0</span>
-                </div>
-                <div class="stat-item">
-                    <span>Racha:</span>
-                    <span id="streak-container">
-                        <span id="streak-count">0</span>
-                        <span id="fire-icon" class="hidden">🔥</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="timer-section">
-            <h2>Temporizador de Estudio</h2>
-            <div class="timer-controls">
-                <div>
-                    <label>Estudio (min):</label>
-                    <input type="number" id="study-time" value="25" min="1" max="60">
-                </div>
-                <div>
-                    <label>Descanso (min):</label>
-                    <input type="number" id="rest-time" value="5" min="1" max="60">
-                </div>
-            </div>
-            <div id="timer-display">25:00</div>
-            <div id="timer-status">Listo para empezar</div>
-            <div class="timer-buttons">
-                <button id="start-timer" onclick="toggleTimer()">Iniciar Estudio</button>
-                <button id="reset-timer" onclick="resetTimer()">Reiniciar</button>
-            </div>
-            <p id="cycle-msg" class="warning">⚠️ Debes completar al menos un ciclo de estudio para marcar tareas como completadas.</p>
-        </div>
-
-        <div class="add-activity-form">
-            <h2>Agregar Nueva Actividad</h2>
-            <input type="text" id="new-activity-name" placeholder="Nombre de la actividad">
-            <select id="new-activity-difficulty">
-                <option value="Easy">Fácil</option>
-                <option value="Medium" selected>Media</option>
-                <option value="Hard">Difícil</option>
-            </select>
-            <button id="add-activity-btn" onclick="addActivity()">Agregar Actividad</button>
-        </div>
-
-        <div class="activities">
-            <h2>Actividades Disponibles</h2>
-            <ul id="activities-list">
-                <!-- Las actividades se cargarán aquí -->
-            </ul>
-        </div>
-
-        <div class="completed-section">
-            <div class="completed-header" onclick="toggleCompleted()">
-                <h2>Tareas Completadas</h2>
-                <span id="toggle-icon">▼</span>
-            </div>
-            <div id="completed-container" class="collapsed">
-                <ul id="completed-list">
-                    <!-- Las actividades completadas se cargarán aquí -->
-                </ul>
-            </div>
-        </div>
+  <div class="background-decor"></div>
+  
+  <header>
+    <div class="logo">
+      <span class="logo-icon">🐾</span>
+      <h1>FocusPets</h1>
     </div>
-    <script src="app.js"></script>
+    <div class="header-status">
+      <span id="mascota-status">😊 Mascota: ¡Feliz y Activa!</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="error-banner" class="error-banner" style="display: none;">
+      ⚠️ No se pudo establecer conexión con el servidor. Verifica que el servidor de la API esté corriendo.
+    </div>
+
+    <!-- SECCIÓN DE MASCOTA FOCUSPETS (Columna 1) -->
+    <section class="card glass" id="seccion-mascota-focus">
+      <div class="card-header">
+        <span class="badge" style="background: linear-gradient(135deg, var(--primary-pet), var(--primary-hover-pet))">Compañero</span>
+        <h2 style="font-family: 'Outfit', sans-serif;">Mi Mascota</h2>
+      </div>
+
+      <!-- PASO 1: SELECCIÓN DE MASCOTA -->
+      <div id="selectionView" class="selection-view hidden">
+        <div class="subtitle">Elige a tu nuevo compañero de enfoque</div>
+        <div class="pets-grid">
+          <!-- PERRO -->
+          <div class="pet-card" onclick="selectPet('Perro', this)">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" fill="#fbcfe8" opacity="0.1"/>
+              <ellipse cx="22" cy="45" rx="8" ry="16" fill="#eab308" transform="rotate(-15 22 45)"/>
+              <ellipse cx="78" cy="45" rx="8" ry="16" fill="#eab308" transform="rotate(15 78 45)"/>
+              <ellipse cx="50" cy="52" rx="26" ry="24" fill="#facc15"/>
+              <ellipse cx="50" cy="62" rx="14" ry="10" fill="#fef08a"/>
+              <polygon points="50,58 45,54 55,54" fill="#1c1917" />
+              <circle cx="40" cy="48" r="3.5" fill="#1c1917"/>
+              <circle cx="40" cy="47" r="1" fill="#ffffff"/>
+              <circle cx="60" cy="48" r="3.5" fill="#1c1917"/>
+              <circle cx="60" cy="47" r="1" fill="#ffffff"/>
+              <circle cx="33" cy="58" r="3" fill="#f472b6" opacity="0.6"/>
+              <circle cx="67" cy="58" r="3" fill="#f472b6" opacity="0.6"/>
+              <path d="M47 67 Q50 74 53 67 Z" fill="#f43f5e" />
+            </svg>
+            <h3>Perrito</h3>
+            <p>Fiel, juguetón y lleno de energía.</p>
+          </div>
+
+          <!-- GATO -->
+          <div class="pet-card" onclick="selectPet('Gato', this)">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" fill="#c084fc" opacity="0.1"/>
+              <polygon points="25,32 30,55 12,42" fill="#818cf8" />
+              <polygon points="25,32 30,55 12,42" fill="#f472b6" transform="scale(0.7) translate(13, 20)" />
+              <polygon points="75,32 70,55 88,42" fill="#818cf8" />
+              <polygon points="75,32 70,55 88,42" fill="#f472b6" transform="scale(0.7) translate(40, 20)" />
+              <ellipse cx="50" cy="54" rx="28" ry="22" fill="#6366f1"/>
+              <ellipse cx="38" cy="50" rx="4" ry="7" fill="#a7f3d0"/>
+              <circle cx="38" cy="50" r="2.5" fill="#064e3b"/>
+              <circle cx="37" cy="48" r="1" fill="#ffffff"/>
+              <ellipse cx="62" cy="50" rx="4" ry="7" fill="#a7f3d0"/>
+              <circle cx="62" cy="50" r="2.5" fill="#064e3b"/>
+              <circle cx="61" cy="48" r="1" fill="#ffffff"/>
+              <polygon points="50,58 47,55 53,55" fill="#f472b6" />
+              <line x1="22" y1="56" x2="10" y2="54" stroke="#c7d2fe" stroke-width="1.5"/>
+              <line x1="22" y1="60" x2="8" y2="60" stroke="#c7d2fe" stroke-width="1.5"/>
+              <line x1="78" y1="56" x2="90" y2="54" stroke="#c7d2fe" stroke-width="1.5"/>
+              <line x1="78" y1="60" x2="92" y2="60" stroke="#c7d2fe" stroke-width="1.5"/>
+              <path d="M47 62 Q50 64 53 62" fill="none" stroke="#312e81" stroke-width="1.5"/>
+            </svg>
+            <h3>Gatito</h3>
+            <p>Tranquilo, observador y astuto.</p>
+          </div>
+
+          <!-- HÁMSTER -->
+          <div class="pet-card" onclick="selectPet('Hámster', this)">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" fill="#fed7aa" opacity="0.1"/>
+              <circle cx="32" cy="36" r="10" fill="#fb923c"/>
+              <circle cx="32" cy="36" r="6" fill="#fecdd3"/>
+              <circle cx="68" cy="36" r="10" fill="#fb923c"/>
+              <circle cx="68" cy="36" r="6" fill="#fecdd3"/>
+              <ellipse cx="50" cy="58" rx="26" ry="24" fill="#f97316"/>
+              <ellipse cx="50" cy="68" rx="16" ry="14" fill="#fff" />
+              <circle cx="40" cy="50" r="3.5" fill="#1c1917"/>
+              <circle cx="39" cy="48" r="1" fill="#ffffff"/>
+              <circle cx="60" cy="50" r="3.5" fill="#1c1917"/>
+              <circle cx="59" cy="48" r="1" fill="#ffffff"/>
+              <circle cx="50" cy="56" r="2" fill="#f43f5e"/>
+              <path d="M47 60 Q50 62 53 60" fill="none" stroke="#7c2d12" stroke-width="1.5"/>
+              <rect x="49" y="60" width="2" height="3" fill="#ffffff"/>
+              <circle cx="33" cy="58" r="5" fill="#fb923c"/>
+              <circle cx="67" cy="58" r="5" fill="#fb923c"/>
+              <circle cx="33" cy="58" r="3" fill="#ffedd5" opacity="0.8"/>
+              <circle cx="67" cy="58" r="3" fill="#ffedd5" opacity="0.8"/>
+            </svg>
+            <h3>Hámster</h3>
+            <p>Rápido, incansable y travieso.</p>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 10px;">
+          <label for="petName">Nombre de tu mascota</label>
+          <div class="input-wrapper">
+            <input type="text" id="petName" placeholder="Ej: Rocket, Michi..." autocomplete="off" style="padding: 10px 14px; font-size: 0.9rem;">
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block" onclick="proceedToPreview()" style="margin-top: 10px; font-size: 0.9rem; padding: 10px;">Adoptar</button>
+      </div>
+
+      <!-- PASO 2: VISTA PREVIA Y ATRIBUTOS -->
+      <div id="previewView" class="preview-view hidden">
+        <div class="preview-layout">
+          <div class="preview-card-wrapper">
+            <div class="preview-svg-container" id="previewPetDisplay"></div>
+            <div class="preview-details">
+              <span class="preview-badge" id="previewPetType">Mascota</span>
+              <h3 id="previewPetName">Nombre</h3>
+              
+              <div class="preview-attributes">
+                <div class="attribute-item">
+                  <div class="attribute-label">Salud</div>
+                  <div class="attribute-value">100 HP</div>
+                </div>
+                <div class="attribute-item">
+                  <div class="attribute-label">Nivel</div>
+                  <div class="attribute-value">Nivel 1</div>
+                </div>
+                <div class="attribute-item">
+                  <div class="attribute-label">Personalidad</div>
+                  <div class="attribute-value" id="previewPersonality">Activa</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-group" style="margin-top: 10px; flex-direction: column; gap: 8px;">
+          <button class="btn btn-primary btn-block" onclick="submitSelection()" id="submitBtn" style="padding: 10px; font-size: 0.9rem;">Confirmar Mascota</button>
+          <button class="btn btn-secondary btn-block" onclick="goBackToSelection()" style="padding: 10px; font-size: 0.9rem;">Atrás</button>
+        </div>
+      </div>
+
+      <!-- PASO 3: DASHBOARD FINAL -->
+      <div id="dashboardView" class="dashboard-view hidden">
+        <div class="pet-display" id="activePetDisplay"></div>
+        <div class="pet-info" style="margin-top: 8px;">
+          <h2 id="activePetName" style="font-size: 1.4rem;">Nombre</h2>
+          <span class="pet-badge" id="activePetType">Tipo</span>
+        </div>
+
+        <div class="stats-card">
+          <div class="stat-row">
+            <div class="stat-header">
+              <span class="stat-name">Salud</span>
+              <span class="stat-value" id="healthText">100 / 100</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill health-fill" id="healthBar" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-header">
+              <span class="stat-name" id="levelLabel">Nivel 1</span>
+              <span class="stat-value">0 / 100 EXP</span>
+            </div>
+            <div class="bar-bg">
+              <div class="bar-fill exp-fill" style="width: 10%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-liberar-pet" id="deletePetBtn" onclick="mostrarConfirmacionEliminar()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"/>
+            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+          </svg>
+          Liberar Mascota
+        </button>
+      </div>
+    </section>
+
+    <!-- MODO ARRANQUE (Columna 2) -->
+    <section class="card glass" id="seccion-arranque">
+      <div class="card-header">
+        <span class="badge">Modo Arranque</span>
+        <h2>Supera la Inercia Inicial</h2>
+      </div>
+      <p class="description">¿Te cuesta empezar? Activa una sesión rápida de 5 o 10 minutos para dar el primer paso y ganar un mini-logro.</p>
+      
+      <div class="arranque-controls">
+        <button class="btn btn-primary" onclick="iniciarArranque(5)">Sesión 5 min</button>
+        <button class="btn btn-secondary" onclick="iniciarArranque(10)">Sesión 10 min</button>
+      </div>
+
+      <div class="timer-display" id="timer-container" style="display: none;">
+        <div class="circular-progress">
+          <svg class="progress-ring" width="160" height="160">
+            <circle class="progress-ring__circle-bg" stroke="#1f2937" stroke-width="8" fill="transparent" r="70" cx="80" cy="80" />
+            <circle class="progress-ring__circle" stroke="url(#timer-gradient)" stroke-width="8" fill="transparent" r="70" cx="80" cy="80" />
+            <defs>
+              <linearGradient id="timer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="timer-text" id="timer-value">05:00</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-warning btn-sm" id="btn-pausar" onclick="alternarPausaArranque()">Pausar</button>
+          <button class="btn btn-danger btn-sm" onclick="cancelarArranque()">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="logros-box">
+        <h3>🏆 Tus Mini-Logros Recientes</h3>
+        <ul id="lista-logros">
+          <li class="empty-list">No has completado sesiones rápidas hoy.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CREACIÓN DE TAREAS Y RECOMPENSAS (Columna 3) -->
+    <section class="card glass" id="seccion-crear-tarea">
+      <div class="card-header">
+        <span class="badge">Nuevo Incentivo</span>
+        <h2>Crear Tarea</h2>
+      </div>
+      <p class="description">Crea una tarea, define su recompensa y motívate a comenzar y terminarla.</p>
+
+      <form id="task-form" onsubmit="crearTarea(event)">
+        <div class="form-group">
+          <label for="titulo">Título de la Tarea</label>
+          <input type="text" id="titulo" placeholder="Ej. Estudiar Álgebra" required>
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripción (Opcional)</label>
+          <textarea id="descripcion" placeholder="Detalles de lo que realizarás..." rows="2"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recompensa">Recompensa al Finalizar</label>
+            <input type="text" id="recompensa" placeholder="Ej. Tomar un Nespresso" required>
+          </div>
+          <div class="form-group">
+            <label for="duracion_bloque">Duración (Minutos)</label>
+            <input type="number" id="duracion_bloque" value="25" min="1" required>
+          </div>
+        </div>
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; margin-bottom: 1.25rem;">
+          <input type="checkbox" id="proyecto_grande" style="width: auto; cursor: pointer; transform: scale(1.1);">
+          <label for="proyecto_grande" style="margin-bottom: 0; cursor: pointer; font-size: 0.9rem; color: var(--text-color);">¿Es un proyecto grande? (Sugerir desglose automático)</label>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Agregar Tarea con Incentivo</button>
+      </form>
+    </section>
+
+    <!-- LISTA DE TAREAS ACTIVAS (Columna 4) -->
+    <section class="card glass" id="seccion-lista-tareas">
+      <div class="card-header">
+        <span class="badge">Seguimiento</span>
+        <h2>Tareas Activas</h2>
+      </div>
+      <p class="description">Aquí puedes ver tus metas activas, desglosarlas y completarlas.</p>
+
+      <div class="tasks-container" id="lista-tareas">
+        <div class="empty-list">Cargando tareas...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL DE CELEBRACIÓN DE RECOMPENSA -->
+  <div class="modal-overlay" id="modal-recompensa">
+    <div class="modal-content glass">
+      <div class="celebration-icon">🎉</div>
+      <h2>¡Meta Cumplida!</h2>
+      <p>Has terminado tu bloque de enfoque con éxito. Tu recompensa autodefinida es:</p>
+      <div class="reward-box" id="reward-text">Tomar un café Nespresso</div>
+      <button class="btn btn-success" onclick="cerrarModal()">¡Reclamar Recompensa!</button>
+    </div>
+  </div>
+
+  <!-- TOAST DE PRIMER PASO DE SUBTAREA -->
+  <div class="toast" id="toast-primer-paso">
+    <div class="toast-icon">✨</div>
+    <div class="toast-body">
+      <h4>¡Gran Primer Paso!</h4>
+      <p>Has completado la primera subtarea y se te ha otorgado un incentivo extra para continuar.</p>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación para eliminar mascota -->
+  <div id="deleteModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-icon-pet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <h3>¿Liberar a tu mascota?</h3>
+      <p>Estás a punto de liberar a <span class="pet-name-highlight" id="modalPetName">tu mascota</span>. Esta acción eliminará su registro de la base de datos y no se puede deshacer.</p>
+      <div class="modal-actions-pet">
+        <button class="btn btn-secondary" onclick="cerrarConfirmacionEliminar()">Cancelar</button>
+        <button class="btn-confirm-delete" id="confirmDeleteBtn" onclick="eliminarMascota()">Sí, liberar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Componente Toast de Mascota -->
+  <div id="toast" class="toast-pet hidden">
+    <span class="toast-pet-msg" id="toastMsg">Ocurrió un error.</span>
+    <span class="toast-pet-close" onclick="hideToast()">✕</span>
+  </div>
+
+  <!-- Selector de Usuarios Flotante -->
+  <div class="user-switcher" id="userSwitcher">
+    <!-- Panel de lista (se muestra al hacer clic en el toggle) -->
+    <div class="user-list hidden" id="userList">
+      <div class="user-list-title">Seleccionar Estudiante</div>
+      <!-- Ítems generados dinámicamente por JS -->
+    </div>
+
+    <!-- Botón toggle inferior -->
+    <div class="user-switcher-toggle" id="userToggle" onclick="toggleUserList()">
+      <div class="avatar" id="currentUserAvatar">?</div>
+      <span class="user-name" id="currentUserName">Cargando...</span>
+      <span class="chevron">▲</span>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE TAREAS -->
+  <script src="app.js"></script>
+
+  <!-- SCRIPT DE MASCOTA -->
+  <script>
+    const petSvgs = {
+      Perro: `
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="#fbcfe8" opacity="0.15"/>
+          <ellipse cx="22" cy="45" rx="8" ry="16" fill="#eab308" transform="rotate(-15 22 45)"/>
+          <ellipse cx="78" cy="45" rx="8" ry="16" fill="#eab308" transform="rotate(15 78 45)"/>
+          <ellipse cx="50" cy="52" rx="26" ry="24" fill="#facc15"/>
+          <ellipse cx="50" cy="62" rx="14" ry="10" fill="#fef08a"/>
+          <polygon points="50,58 45,54 55,54" fill="#1c1917" />
+          <circle cx="40" cy="48" r="3.5" fill="#1c1917"/>
+          <circle cx="40" cy="47" r="1" fill="#ffffff"/>
+          <circle cx="60" cy="48" r="3.5" fill="#1c1917"/>
+          <circle cx="60" cy="47" r="1" fill="#ffffff"/>
+          <circle cx="33" cy="58" r="3" fill="#f472b6" opacity="0.6"/>
+          <circle cx="67" cy="58" r="3" fill="#f472b6" opacity="0.6"/>
+          <path d="M47 67 Q50 74 53 67 Z" fill="#f43f5e" />
+        </svg>
+      `,
+      Gato: `
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="#c084fc" opacity="0.15"/>
+          <polygon points="25,32 30,55 12,42" fill="#818cf8" />
+          <polygon points="25,32 30,55 12,42" fill="#f472b6" transform="scale(0.7) translate(13, 20)" />
+          <polygon points="75,32 70,55 88,42" fill="#818cf8" />
+          <polygon points="75,32 70,55 88,42" fill="#f472b6" transform="scale(0.7) translate(40, 20)" />
+          <ellipse cx="50" cy="54" rx="28" ry="22" fill="#6366f1"/>
+          <ellipse cx="38" cy="50" rx="4" ry="7" fill="#a7f3d0"/>
+          <circle cx="38" cy="50" r="2.5" fill="#064e3b"/>
+          <circle cx="37" cy="48" r="1" fill="#ffffff"/>
+          <ellipse cx="62" cy="50" rx="4" ry="7" fill="#a7f3d0"/>
+          <circle cx="62" cy="50" r="2.5" fill="#064e3b"/>
+          <circle cx="61" cy="48" r="1" fill="#ffffff"/>
+          <polygon points="50,58 47,55 53,55" fill="#f472b6" />
+          <line x1="22" y1="56" x2="10" y2="54" stroke="#c7d2fe" stroke-width="1.5"/>
+          <line x1="22" y1="60" x2="8" y2="60" stroke="#c7d2fe" stroke-width="1.5"/>
+          <line x1="78" y1="56" x2="90" y2="54" stroke="#c7d2fe" stroke-width="1.5"/>
+          <line x1="78" y1="60" x2="92" y2="60" stroke="#c7d2fe" stroke-width="1.5"/>
+          <path d="M47 62 Q50 64 53 62" fill="none" stroke="#312e81" stroke-width="1.5"/>
+        </svg>
+      `,
+      Hámster: `
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="#fed7aa" opacity="0.15"/>
+          <circle cx="32" cy="36" r="10" fill="#fb923c"/>
+          <circle cx="32" cy="36" r="6" fill="#fecdd3"/>
+          <circle cx="68" cy="36" r="10" fill="#fb923c"/>
+          <circle cx="68" cy="36" r="6" fill="#fecdd3"/>
+          <ellipse cx="50" cy="58" rx="26" ry="24" fill="#f97316"/>
+          <ellipse cx="50" cy="68" rx="16" ry="14" fill="#fff" />
+          <circle cx="40" cy="50" r="3.5" fill="#1c1917"/>
+          <circle cx="39" cy="48" r="1" fill="#ffffff"/>
+          <circle cx="60" cy="50" r="3.5" fill="#1c1917"/>
+          <circle cx="59" cy="48" r="1" fill="#ffffff"/>
+          <circle cx="50" cy="56" r="2" fill="#f43f5e"/>
+          <path d="M47 60 Q50 62 53 60" fill="none" stroke="#7c2d12" stroke-width="1.5"/>
+          <rect x="49" y="60" width="2" height="3" fill="#ffffff"/>
+          <circle cx="33" cy="58" r="5" fill="#fb923c"/>
+          <circle cx="67" cy="58" r="5" fill="#fb923c"/>
+          <circle cx="33" cy="58" r="3" fill="#ffedd5" opacity="0.8"/>
+          <circle cx="67" cy="58" r="3" fill="#ffedd5" opacity="0.8"/>
+        </svg>
+      `
+    };
+
+    const petPersonalities = {
+      Perro: 'Fiel y Enérgico',
+      Gato: 'Calmo y Enfocado',
+      Hámster: 'Veloz e Hiperactivo'
+    };
+
+    let selectedType = null;
+    let tempName = "";
+    let USUARIO_ID = 1;
+
+    // Datos de los 5 usuarios (nombre + color de avatar)
+    const USUARIOS = [
+      { id: 1, nombre: 'Antonia B.',   color: 'linear-gradient(135deg,#9333ea,#6366f1)' },
+      { id: 2, nombre: 'Joaquín B.',  color: 'linear-gradient(135deg,#0ea5e9,#6366f1)' },
+      { id: 3, nombre: 'Fernanda C.', color: 'linear-gradient(135deg,#10b981,#0ea5e9)' },
+      { id: 4, nombre: 'Martín D.',   color: 'linear-gradient(135deg,#f59e0b,#ef4444)' },
+      { id: 5, nombre: 'Matthew O.',  color: 'linear-gradient(135deg,#f43f5e,#9333ea)' },
+    ];
+
+    // Cache del estado de mascotas por usuario
+    const petCache = {};
+
+    // Al cargar la página, comprobar si ya tiene mascota guardada en DB
+    window.addEventListener('DOMContentLoaded', async () => {
+      await inicializarSwitcher();
+      await verificarEstadoMascota();
+    });
+
+    /* ─── Lógica del User Switcher ─── */
+    async function inicializarSwitcher() {
+      const list = document.getElementById('userList');
+      // Precachear estado de todas las mascotas
+      await Promise.all(USUARIOS.map(async u => {
+        try {
+          const r = await fetch(`/api/usuarios/${u.id}/mascota`);
+          petCache[u.id] = r.status === 200 ? (await r.json()).mascota : null;
+        } catch { petCache[u.id] = null; }
+      }));
+
+      // Renderizar los ítems del selector
+      const items = USUARIOS.map(u => {
+        const initials = u.nombre.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+        const petInfo = petCache[u.id]
+          ? `🐾 ${petCache[u.id].nombre_mascota} (${petCache[u.id].tipo_mascota})`
+          : 'Sin mascota aún';
+        return `
+          <div class="user-item ${u.id === USUARIO_ID ? 'active-user' : ''}" 
+               id="user-item-${u.id}"
+               onclick="switchUser(${u.id})">
+            <div class="ui-avatar" style="background: ${u.color}">${initials}</div>
+            <div class="ui-info">
+              <div class="ui-name">${u.nombre}</div>
+              <div class="ui-pet-status">${petInfo}</div>
+            </div>
+            ${u.id === USUARIO_ID ? '<div class="ui-active-dot"></div>' : ''}
+          </div>`;
+      }).join('');
+      list.insertAdjacentHTML('beforeend', items);
+
+      // Actualizar el toggle con el usuario activo
+      actualizarToggle();
+    }
+
+    function actualizarToggle() {
+      const u = USUARIOS.find(x => x.id === USUARIO_ID);
+      const initials = u.nombre.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+      document.getElementById('currentUserAvatar').innerText = initials;
+      document.getElementById('currentUserAvatar').style.background = u.color;
+      document.getElementById('currentUserName').innerText = u.nombre;
+    }
+
+    function toggleUserList() {
+      const list = document.getElementById('userList');
+      const toggle = document.getElementById('userToggle');
+      list.classList.toggle('hidden');
+      toggle.classList.toggle('open');
+    }
+
+    async function switchUser(nuevoId) {
+      if (nuevoId === USUARIO_ID) { toggleUserList(); return; }
+
+      USUARIO_ID = nuevoId;
+
+      // Actualizar estilos de los ítems
+      USUARIOS.forEach(u => {
+        const item = document.getElementById(`user-item-${u.id}`);
+        if (u.id === nuevoId) {
+          item.classList.add('active-user');
+          if (!item.querySelector('.ui-active-dot')) {
+            item.insertAdjacentHTML('beforeend', '<div class="ui-active-dot"></div>');
+          }
+        } else {
+          item.classList.remove('active-user');
+          const dot = item.querySelector('.ui-active-dot');
+          if (dot) dot.remove();
+        }
+      });
+
+      actualizarToggle();
+      toggleUserList();
+
+      // Resetear todas las vistas
+      document.getElementById('selectionView').classList.add('hidden');
+      document.getElementById('previewView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.add('hidden');
+      selectedType = null;
+      tempName = '';
+      document.getElementById('petName').value = '';
+      document.querySelectorAll('.pet-card').forEach(c => c.classList.remove('selected'));
+
+      // Recargar estado del nuevo usuario
+      await verificarEstadoMascota();
+    }
+
+    // Comprobar estado inicial en la base de datos
+    async function verificarEstadoMascota() {
+      try {
+        const response = await fetch(`/api/usuarios/${USUARIO_ID}/mascota`);
+        if (response.status === 200) {
+          const data = await response.json();
+          mostrarDashboard(data.mascota);
+        } else if (response.status === 404) {
+          // No tiene mascota, mostrar Paso 1
+          document.getElementById('selectionView').classList.remove('hidden');
+        } else {
+          showToast('Error al verificar el estado de la mascota.');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('No se pudo conectar con el servidor.');
+      }
+    }
+
+    // Al hacer clic en una tarjeta
+    function selectPet(type, element) {
+      selectedType = type;
+      const cards = document.querySelectorAll('.pet-card');
+      cards.forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    // Paso 1 -> Paso 2 (Guardado temporal en memoria, sin escribir en DB)
+    function proceedToPreview() {
+      const nameInput = document.getElementById('petName');
+      tempName = nameInput.value.trim();
+
+      if (!selectedType) {
+        showToast('Por favor, selecciona una mascota antes de continuar.');
+        return;
+      }
+
+      if (!tempName) {
+        showToast('Por favor, escribe un nombre para tu mascota.');
+        nameInput.focus();
+        return;
+      }
+
+      // Configurar datos de la pantalla de vista previa
+      document.getElementById('previewPetName').innerText = tempName;
+      document.getElementById('previewPetType').innerText = `Mascota: ${selectedType}`;
+      document.getElementById('previewPersonality').innerText = petPersonalities[selectedType] || 'Desconocida';
+      document.getElementById('previewPetDisplay').innerHTML = petSvgs[selectedType];
+
+      // Ocultar paso 1 y mostrar paso 2
+      document.getElementById('selectionView').classList.add('hidden');
+      document.getElementById('previewView').classList.remove('hidden');
+    }
+
+    // Paso 2 -> Paso 1 (Retroceder sin guardar)
+    function goBackToSelection() {
+      document.getElementById('previewView').classList.add('hidden');
+      document.getElementById('selectionView').classList.remove('hidden');
+    }
+
+    // Paso 2 -> Paso 3 (Submit final que escribe en base de datos)
+    async function submitSelection() {
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Adoptando...';
+
+      try {
+        const response = await fetch(`/api/usuarios/${USUARIO_ID}/mascota`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            nombre_mascota: tempName,
+            tipo_mascota: selectedType
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.status === 201) {
+          // Éxito. Mostrar Dashboard definitivo
+          mostrarDashboard(data);
+          
+          // Actualizar caché e item del switcher
+          petCache[USUARIO_ID] = data;
+          const userItem = document.getElementById(`user-item-${USUARIO_ID}`);
+          if (userItem) {
+            const petStatus = userItem.querySelector('.ui-pet-status');
+            if (petStatus) petStatus.innerText = `🐾 ${data.nombre_mascota} (${data.tipo_mascota})`;
+          }
+        } else {
+          showToast(data.error || 'Error al registrar la mascota.');
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Confirmar Mascota';
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Fallo en la comunicación con el servidor.');
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Confirmar Mascota';
+      }
+    }
+
+    // Cambiar vista al Dashboard Final
+    function mostrarDashboard(mascota) {
+      document.getElementById('selectionView').classList.add('hidden');
+      document.getElementById('previewView').classList.add('hidden');
+      
+      const dashboard = document.getElementById('dashboardView');
+      dashboard.classList.remove('hidden');
+
+      // Inyectar datos de la mascota
+      document.getElementById('activePetName').innerText = mascota.nombre_mascota;
+      document.getElementById('activePetType').innerText = `Mascota: ${mascota.tipo_mascota}`;
+      document.getElementById('healthText').innerText = `${mascota.salud} / 100`;
+      document.getElementById('healthBar').style.width = `${mascota.salud}%`;
+      document.getElementById('levelLabel').innerText = `Nivel ${mascota.nivel}`;
+      
+      // Avatar SVG correspondiente
+      document.getElementById('activePetDisplay').innerHTML = petSvgs[mascota.tipo_mascota] || '';
+      
+      // Actualizar el estado en el header
+      document.getElementById('mascota-status').innerText = `🐾 Mascota: ¡${mascota.nombre_mascota} está activa!`;
+
+      // Guardar nombre para el modal de eliminación
+      window._activePetName = mascota.nombre_mascota;
+    }
+
+    // Funciones Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        hideToast();
+      }, 5000);
+    }
+
+    function hideToast() {
+      document.getElementById('toast').classList.add('hidden');
+    }
+
+    // ─── Eliminar Mascota ───
+    function mostrarConfirmacionEliminar() {
+      document.getElementById('modalPetName').innerText = window._activePetName || 'tu mascota';
+      document.getElementById('deleteModal').classList.add('active'); // compatible con style.css modal overlay
+      document.getElementById('deleteModal').style.display = 'flex';
+    }
+
+    function cerrarConfirmacionEliminar() {
+      document.getElementById('deleteModal').classList.remove('active');
+      document.getElementById('deleteModal').style.display = 'none';
+    }
+
+    async function eliminarMascota() {
+      const confirmBtn = document.getElementById('confirmDeleteBtn');
+      confirmBtn.disabled = true;
+      confirmBtn.innerText = 'Liberando...';
+
+      try {
+        const response = await fetch(`/api/usuarios/${USUARIO_ID}/mascota`, {
+          method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (response.status === 200) {
+          // Cerrar modal
+          cerrarConfirmacionEliminar();
+
+          // Actualizar cache del switcher
+          petCache[USUARIO_ID] = null;
+          const userItem = document.getElementById(`user-item-${USUARIO_ID}`);
+          if (userItem) {
+            const petStatus = userItem.querySelector('.ui-pet-status');
+            if (petStatus) petStatus.innerText = 'Sin mascota aún';
+          }
+
+          // Resetear estado
+          selectedType = null;
+          tempName = '';
+          document.getElementById('petName').value = '';
+          document.querySelectorAll('.pet-card').forEach(c => c.classList.remove('selected'));
+          window._activePetName = null;
+
+          // Cambiar vista: ocultar dashboard, mostrar selección
+          document.getElementById('dashboardView').classList.add('hidden');
+          document.getElementById('selectionView').classList.remove('hidden');
+          
+          // Resetear cabecera
+          document.getElementById('mascota-status').innerText = '😊 Mascota: ¡Sin mascota adoptada!';
+
+          showToast('Tu mascota ha sido liberada exitosamente. ¡Elige un nuevo compañero!');
+        } else {
+          showToast(data.error || 'Error al liberar la mascota.');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Fallo en la comunicación con el servidor.');
+      } finally {
+        confirmBtn.disabled = false;
+        confirmBtn.innerText = 'Sí, liberar';
+      }
+    }
+  </script>
+</body>
+</html>vidor.');
+      } finally {
+        confirmBtn.disabled = false;
+        confirmBtn.innerText = 'Sí, liberar';
+      }
+    }
+  </script>
+>>>>>>> origin/main
 </body>
 </html>
