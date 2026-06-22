@@ -73,8 +73,8 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 | Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
 | :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
 | Antonia Bustamante Borquez | Technical Lead y Developer | 2.4 - 3.2 - 5.1 |
-| Joaquin Bustamante Ramirez | Technical Lead y Developer + bonus | 3.1 - 5.1 |
-| Fernanda Cerda Toledo      | Scrum Master - Quality Assurance | 1.1 - 2.1 - 2.2 - 2.3 - 4.1 |
-| Martin Duran Salinas       | Scrum Master - Quality Assurance | 1.1 - 2.1 - 2.2 - 2.3 - 4.1 |
+| Joaquin Bustamante Ramirez | Quality Assurance + bonus | 3.1 - 5.1 |
+| Fernanda Cerda Toledo      | Scrum Master  | 1.1 - 2.1 - 2.2 - 2.3 - 4.1 |
+| Martin Duran Salinas       | Scrum Master  | 1.1 - 2.1 - 2.2 - 2.3 - 4.1 |
 | Matthew Osorio Muñoz       | Arquitecto | 1.2 - 1.3 - 3.3 |
 
