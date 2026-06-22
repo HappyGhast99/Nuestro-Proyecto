@@ -1,2 +1,4 @@
 node_modules/
 datos.db
+.env
+.gemini/

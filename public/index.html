@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Gamificación</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Panel de Disciplina</h1>
+        
+        <div class="profile-card">
+            <h2 id="username">Cargando...</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <span>XP Total:</span>
+                    <span id="total-xp">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Racha:</span>
+                    <span id="streak-container">
+                        <span id="streak-count">0</span>
+                        <span id="fire-icon" class="hidden">🔥</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timer-section">
+            <h2>Temporizador de Estudio</h2>
+            <div class="timer-controls">
+                <div>
+                    <label>Estudio (min):</label>
+                    <input type="number" id="study-time" value="25" min="1" max="60">
+                </div>
+                <div>
+                    <label>Descanso (min):</label>
+                    <input type="number" id="rest-time" value="5" min="1" max="60">
+                </div>
+            </div>
+            <div id="timer-display">25:00</div>
+            <div id="timer-status">Listo para empezar</div>
+            <div class="timer-buttons">
+                <button id="start-timer" onclick="toggleTimer()">Iniciar Estudio</button>
+                <button id="reset-timer" onclick="resetTimer()">Reiniciar</button>
+            </div>
+            <p id="cycle-msg" class="warning">⚠️ Debes completar al menos un ciclo de estudio para marcar tareas como completadas.</p>
+        </div>
+
+        <div class="add-activity-form">
+            <h2>Agregar Nueva Actividad</h2>
+            <input type="text" id="new-activity-name" placeholder="Nombre de la actividad">
+            <select id="new-activity-difficulty">
+                <option value="Easy">Fácil</option>
+                <option value="Medium" selected>Media</option>
+                <option value="Hard">Difícil</option>
+            </select>
+            <button id="add-activity-btn" onclick="addActivity()">Agregar Actividad</button>
+        </div>
+
+        <div class="activities">
+            <h2>Actividades Disponibles</h2>
+            <ul id="activities-list">
+                <!-- Las actividades se cargarán aquí -->
+            </ul>
+        </div>
+
+        <div class="completed-section">
+            <div class="completed-header" onclick="toggleCompleted()">
+                <h2>Tareas Completadas</h2>
+                <span id="toggle-icon">▼</span>
+            </div>
+            <div id="completed-container" class="collapsed">
+                <ul id="completed-list">
+                    <!-- Las actividades completadas se cargarán aquí -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
