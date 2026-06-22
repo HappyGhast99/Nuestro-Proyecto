@@ -9,6 +9,10 @@ Nuestra propuesta consiste en una aplicación que automatiza la planificación d
 
 Para asegurar que el usuario siga este plan, el sistema relaciona el progreso académico con la vida de una mascota virtual. Al cumplir con los objetivos establecidos, la mascota permanece saludable; pero, si el usuario posterga sus deberes, esta mostrará signos de descuido y enviará alertas sobre su estado anímico. De este modo, se sustituye la presión tradicional por un sistema de cuidado y responsabilidad personal.
 
+# Tecnologias:
+
+
+
 # Historias de usuarios epicas:
 
 | ID      | Nombre                                                                                                                     | Issue |
