@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusPets - Incentivos y Tareas</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-decor"></div>
+  
+  <header>
+    <div class="logo">
+      <span class="logo-icon">🐾</span>
+      <h1>FocusPets</h1>
+    </div>
+    <div class="header-status">
+      <span id="mascota-status">😊 Mascota: ¡Feliz y Activa!</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="error-banner" class="error-banner" style="display: none;">
+      ⚠️ No se pudo establecer conexión con el servidor. Verifica que el servidor de la API esté corriendo.
+    </div>
+    <!-- MODO ARRANQUE -->
+    <section class="card glass" id="seccion-arranque">
+      <div class="card-header">
+        <span class="badge">Modo Arranque</span>
+        <h2>Supera la Inercia Inicial</h2>
+      </div>
+      <p class="description">¿Te cuesta empezar? Activa una sesión rápida de 5 o 10 minutos para dar el primer paso y ganar un mini-logro.</p>
+      
+      <div class="arranque-controls">
+        <button class="btn btn-primary" onclick="iniciarArranque(5)">Sesión 5 min</button>
+        <button class="btn btn-secondary" onclick="iniciarArranque(10)">Sesión 10 min</button>
+      </div>
+
+      <div class="timer-display" id="timer-container" style="display: none;">
+        <div class="circular-progress">
+          <svg class="progress-ring" width="160" height="160">
+            <circle class="progress-ring__circle-bg" stroke="#1f2937" stroke-width="8" fill="transparent" r="70" cx="80" cy="80" />
+            <circle class="progress-ring__circle" stroke="url(#timer-gradient)" stroke-width="8" fill="transparent" r="70" cx="80" cy="80" />
+            <defs>
+              <linearGradient id="timer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="timer-text" id="timer-value">05:00</div>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-warning btn-sm" id="btn-pausar" onclick="alternarPausaArranque()">Pausar</button>
+          <button class="btn btn-danger btn-sm" onclick="cancelarArranque()">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="logros-box">
+        <h3>🏆 Tus Mini-Logros Recientes</h3>
+        <ul id="lista-logros">
+          <li class="empty-list">No has completado sesiones rápidas hoy.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CREACIÓN DE TAREAS Y RECOMPENSAS -->
+    <section class="card glass" id="seccion-crear-tarea">
+      <div class="card-header">
+        <span class="badge">Nuevo Incentivo</span>
+        <h2>Crear Tarea</h2>
+      </div>
+      <p class="description">Crea una tarea, define su recompensa y motívate a comenzar y terminarla.</p>
+
+      <form id="task-form" onsubmit="crearTarea(event)">
+        <div class="form-group">
+          <label for="titulo">Título de la Tarea</label>
+          <input type="text" id="titulo" placeholder="Ej. Estudiar Álgebra" required>
+        </div>
+        <div class="form-group">
+          <label for="descripcion">Descripción (Opcional)</label>
+          <textarea id="descripcion" placeholder="Detalles de lo que realizarás..." rows="2"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recompensa">Recompensa al Finalizar</label>
+            <input type="text" id="recompensa" placeholder="Ej. Tomar un Nespresso" required>
+          </div>
+          <div class="form-group">
+            <label for="duracion_bloque">Duración (Minutos)</label>
+            <input type="number" id="duracion_bloque" value="25" min="1" required>
+          </div>
+        </div>
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; margin-bottom: 1.25rem;">
+          <input type="checkbox" id="proyecto_grande" style="width: auto; cursor: pointer; transform: scale(1.1);">
+          <label for="proyecto_grande" style="margin-bottom: 0; cursor: pointer; font-size: 0.9rem; color: var(--text-color);">¿Es un proyecto grande? (Sugerir desglose automático)</label>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Agregar Tarea con Incentivo</button>
+      </form>
+    </section>
+
+    <!-- LISTA DE TAREAS ACTIVAS -->
+    <section class="card glass" id="seccion-lista-tareas">
+      <div class="card-header">
+        <span class="badge">Seguimiento</span>
+        <h2>Tareas Activas</h2>
+      </div>
+      <p class="description">Aquí puedes ver tus metas activas, desglosarlas y completarlas.</p>
+
+      <div class="tasks-container" id="lista-tareas">
+        <div class="empty-list">Cargando tareas...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL DE CELEBRACIÓN DE RECOMPENSA -->
+  <div class="modal-overlay" id="modal-recompensa">
+    <div class="modal-content glass">
+      <div class="celebration-icon">🎉</div>
+      <h2>¡Meta Cumplida!</h2>
+      <p>Has terminado tu bloque de enfoque con éxito. Tu recompensa autodefinida es:</p>
+      <div class="reward-box" id="reward-text">Tomar un café Nespresso</div>
+      <button class="btn btn-success" onclick="cerrarModal()">¡Reclamar Recompensa!</button>
+    </div>
+  </div>
+
+  <!-- MODAL DE PRIMER PASO DE SUBTAREA -->
+  <div class="toast" id="toast-primer-paso">
+    <div class="toast-icon">✨</div>
+    <div class="toast-body">
+      <h4>¡Gran Primer Paso!</h4>
+      <p>Has completado la primera subtarea y se te ha otorgado un incentivo extra para continuar.</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
