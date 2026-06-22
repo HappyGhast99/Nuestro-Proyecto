@@ -44,7 +44,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 ### Requisitos previos 
 
-[Ver los requisitos previos](Requisitos.md)
+[Ver los requisitos previos](./MDS/Requisitos.md)
 
 ### Variables de entorno 
 
