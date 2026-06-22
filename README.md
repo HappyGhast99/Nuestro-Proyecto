@@ -11,7 +11,7 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 ## PRUEBA 2
 
-[Ver contenido de la prueba 2](PRUEBA2.md)
+[Ver contenido de la prueba 2](./PRUEBA2/PRUEBA2.md)
 
 
 ## Historias de usuarios epicas:
