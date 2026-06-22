@@ -72,9 +72,9 @@ Para asegurar que el usuario siga este plan, el sistema relaciona el progreso ac
 
 | Integrantes                | Rol           | Ítems de la rúbrica a cargo                                                                   |
 | :------------------------- | :------------ | :-------------------------------------------------------------------------------------------- |
-| Antonia Bustamante Borquez | Technical Lead y Developer | [Analisis code smell y deuda tactica] |
-| Joaquin Bustamante Ramirez | Technical Lead y Developer + bonus   | [Apoyo en codigo e implementacion "Bonus"]. |
-| Fernanda Cerda Toledo      | Scrum Master - Quality Assurance    | Desarrolladora Backend - API 1. [Diseño y testeo] |
-| Martin Duran Salinas       | Scrum Master - Quality Assurance | Desarrollador Backend - API 2. [Diseño y testeo]  |
-| Matthew Osorio Muñoz       | Arquitecto | [Analista] |
+| Antonia Bustamante Borquez | Technical Lead y Developer | 2.4 - 3.2 - 5.1 |
+| Joaquin Bustamante Ramirez | Technical Lead y Developer + bonus | 3.1 - 5.1 |
+| Fernanda Cerda Toledo      | Scrum Master - Quality Assurance | 1.1 - 2.1 - 2.2 - 2.3 - 4.1 |
+| Martin Duran Salinas       | Scrum Master - Quality Assurance | 1.1 - 2.1 - 2.2 - 2.3 - 4.1 |
+| Matthew Osorio Muñoz       | Arquitecto | 1.2 - 1.3 - 3.3 |
 
